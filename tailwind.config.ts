@@ -219,14 +219,14 @@ export default {
 				'glow': 'glow 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite',
 				'skill-fill': 'skill-fill 2s ease-out forwards',
-				// Cinematic animations
-				'slide-up': 'slide-up 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'slide-down': 'slide-down 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'slide-left': 'slide-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'slide-right': 'slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'zoom-in': 'zoom-in 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'flip-in': 'flip-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'parallax-float': 'parallax-float 6s ease-in-out infinite'
+				// Cinematic animations - Slower and more dramatic
+				'slide-up': 'slide-up 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'slide-down': 'slide-down 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'slide-left': 'slide-left 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'slide-right': 'slide-right 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'zoom-in': 'zoom-in 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'flip-in': 'flip-in 2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+				'parallax-float': 'parallax-float 8s ease-in-out infinite'
 			},
 			transitionProperty: {
 				'smooth': 'var(--transition-smooth)',

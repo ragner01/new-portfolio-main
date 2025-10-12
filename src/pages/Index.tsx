@@ -177,7 +177,7 @@ const Index = () => {
 
   const SkillsSection = () => {
     const { elementRef: skillsRef, isVisible: skillsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(skills.length, 150);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(skills.length, 300);
 
     return (
       <section className="py-20 bg-secondary/20">
@@ -201,7 +201,7 @@ const Index = () => {
                 className={`transition-all duration-500 ${
                   visibleItems[index] ? 'animate-slide-up opacity-100' : 'opacity-0'
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ const Index = () => {
                     className="h-full bg-gradient-primary rounded-full transition-all duration-2000 ease-out"
                     style={{ 
                       width: visibleItems[index] ? `${skill.level}%` : '0%',
-                      transitionDelay: `${index * 0.1}s`
+                      transitionDelay: `${index * 0.2}s`
                     }}
                   />
                 </div>
@@ -229,7 +229,7 @@ const Index = () => {
 
   const ProjectsSection = () => {
     const { elementRef: projectsRef, isVisible: projectsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(projects.length, 200);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(projects.length, 400);
 
     return (
       <section className="py-20 bg-background">
@@ -253,7 +253,7 @@ const Index = () => {
                 className={`transition-all duration-500 ${
                   visibleItems[index] ? 'animate-zoom-in opacity-100' : 'opacity-0'
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                style={{ animationDelay: `${index * 0.3}s` }}
               >
                 <Card className="bg-gradient-card backdrop-blur-sm border-glass-border shadow-card hover:shadow-glow transition-all duration-500 group h-full">
                   <CardContent className="p-6">
@@ -433,7 +433,7 @@ const Index = () => {
         className={`transition-all duration-500 ${
           isVisible ? 'animate-slide-up opacity-100' : 'opacity-0'
         }`}
-        style={{ animationDelay: `${index * 0.1}s` }}
+        style={{ animationDelay: `${index * 0.2}s` }}
       >
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
@@ -447,7 +447,7 @@ const Index = () => {
             className="h-full bg-gradient-primary rounded-full transition-all duration-2000 ease-out"
             style={{ 
               width: isVisible ? `${skill.level}%` : '0%',
-              transitionDelay: `${index * 0.1}s`
+              transitionDelay: `${index * 0.2}s`
             }}
           />
         </div>
