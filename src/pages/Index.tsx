@@ -107,8 +107,8 @@ const Index = () => {
 
   const AboutSection = () => {
     const { elementRef: aboutRef, isVisible: aboutVisible } = useScrollAnimation();
-    const { elementRef: card1Ref, isVisible: card1Visible } = useScrollAnimation();
-    const { elementRef: card2Ref, isVisible: card2Visible } = useScrollAnimation();
+    const { elementRef: card1Ref, isVisible: card1Visible } = useScrollAnimation({ threshold: 0.2 });
+    const { elementRef: card2Ref, isVisible: card2Visible } = useScrollAnimation({ threshold: 0.2 });
 
     return (
       <section className="py-20 bg-background">
@@ -130,7 +130,7 @@ const Index = () => {
             <div ref={card1Ref}>
               <Card className={`bg-gradient-card backdrop-blur-sm border-glass-border shadow-card transition-all duration-1000 ${
                 card1Visible ? 'animate-slide-left opacity-100' : 'opacity-0'
-              }`}>
+              }`} style={{ animationDelay: '0.3s' }}>
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-4">Technical Expertise</h3>
                   <p className="text-foreground/80 mb-6">
@@ -165,7 +165,7 @@ const Index = () => {
             <div ref={card2Ref}>
               <Card className={`bg-gradient-card backdrop-blur-sm border-glass-border shadow-card transition-all duration-1000 ${
                 card2Visible ? 'animate-slide-right opacity-100' : 'opacity-0'
-              }`}>
+              }`} style={{ animationDelay: '0.6s' }}>
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-4">Leadership & Management</h3>
                   <p className="text-foreground/80 mb-6">
@@ -197,7 +197,7 @@ const Index = () => {
 
   const SkillsSection = () => {
     const { elementRef: skillsRef, isVisible: skillsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(skills.length, 300);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(skills.length, 500);
 
     return (
       <section className="py-20 bg-secondary/20">
@@ -221,7 +221,7 @@ const Index = () => {
                 className={`transition-all duration-500 ${
                   visibleItems[index] ? 'animate-slide-up opacity-100' : 'opacity-0'
                 }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
+                style={{ animationDelay: `${index * 0.4}s` }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
@@ -235,7 +235,7 @@ const Index = () => {
                     className="h-full bg-gradient-primary rounded-full transition-all duration-2000 ease-out"
                     style={{ 
                       width: visibleItems[index] ? `${skill.level}%` : '0%',
-                      transitionDelay: `${index * 0.2}s`
+                      transitionDelay: `${index * 0.4}s`
                     }}
                   />
                 </div>
@@ -249,7 +249,7 @@ const Index = () => {
 
   const ProjectsSection = () => {
     const { elementRef: projectsRef, isVisible: projectsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(projects.length, 400);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(projects.length, 600);
 
     return (
       <section className="py-20 bg-background">
@@ -273,7 +273,7 @@ const Index = () => {
                 className={`transition-all duration-500 ${
                   visibleItems[index] ? 'animate-zoom-in opacity-100' : 'opacity-0'
                 }`}
-                style={{ animationDelay: `${index * 0.3}s` }}
+                style={{ animationDelay: `${index * 0.5}s` }}
               >
                 <Card className="bg-gradient-card backdrop-blur-sm border-glass-border shadow-card hover:shadow-glow transition-all duration-500 group h-full">
                   <CardContent className="p-6">
@@ -355,7 +355,7 @@ const Index = () => {
 
   const ContactSection = () => {
     const { elementRef: contactRef, isVisible: contactVisible } = useScrollAnimation();
-    const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation();
+    const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation({ threshold: 0.2 });
 
     return (
       <section id="contact" className="py-20 bg-secondary/20">
@@ -376,7 +376,7 @@ const Index = () => {
             <div ref={cardRef}>
               <Card className={`bg-gradient-card backdrop-blur-sm border-glass-border shadow-card transition-all duration-1000 ${
                 cardVisible ? 'animate-zoom-in opacity-100' : 'opacity-0'
-              }`}>
+              }`} style={{ animationDelay: '0.4s' }}>
                 <CardContent className="p-8">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
