@@ -2,10 +2,18 @@ import { useState, useEffect } from 'react';
 import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/use-scroll-animation';
+import { ContactForm } from '@/components/ContactForm';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { ProjectFilter, ProjectCategory } from '@/components/ProjectFilter';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
+import { BlogSection } from '@/components/BlogSection';
+import { ResumeDownload } from '@/components/ResumeDownload';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All');
   
   useEffect(() => {
     setIsVisible(true);
@@ -104,6 +112,14 @@ const Index = () => {
       icon: <BarChart3 className="w-5 h-5" />
     }
   ];
+
+  // Get unique categories from projects
+  const projectCategories: ProjectCategory[] = ['All', ...Array.from(new Set(projects.map(p => p.category as ProjectCategory)))];
+  
+  // Filter projects based on active category
+  const filteredProjects = activeCategory === 'All' 
+    ? projects 
+    : projects.filter(project => project.category === activeCategory);
 
   const AboutSection = () => {
     const { elementRef: aboutRef, isVisible: aboutVisible } = useScrollAnimation();
@@ -247,7 +263,7 @@ const Index = () => {
 
   const ProjectsSection = () => {
     const { elementRef: projectsRef, isVisible: projectsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(projects.length, 250);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 250);
 
     return (
       <section className="py-20 bg-background">
@@ -264,8 +280,15 @@ const Index = () => {
             </p>
           </div>
 
+          <ProjectFilter
+            categories={projectCategories}
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+            projectCount={filteredProjects.length}
+          />
+
           <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
                 className={`transition-all duration-500 ${
@@ -352,7 +375,6 @@ const Index = () => {
 
   const ContactSection = () => {
     const { elementRef: contactRef, isVisible: contactVisible } = useScrollAnimation();
-    const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation();
 
     return (
       <section id="contact" className="py-20 bg-secondary/20">
@@ -370,70 +392,63 @@ const Index = () => {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div ref={cardRef}>
-              <Card className={`bg-gradient-card backdrop-blur-sm border-glass-border shadow-card transition-all duration-1000 ${
-                cardVisible ? 'animate-zoom-in opacity-100' : 'opacity-0'
-              }`}>
-                <CardContent className="p-8">
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
-                      <p className="text-foreground/80 mb-6">
-                        I'm always open to discussing new opportunities, interesting projects, 
-                        or just having a chat about technology and development.
-                      </p>
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <Mail className="w-5 h-5 text-primary" />
-                          <a 
-                            href="mailto:alimiomotola20@gmail.com"
-                            className="text-foreground hover:text-primary transition-colors"
-                          >
-                            alimiomotola20@gmail.com
-                          </a>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Github className="w-5 h-5 text-primary" />
-                          <a 
-                            href="https://github.com/ragner01"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-foreground hover:text-primary transition-colors"
-                          >
-                            github.com/ragner01
-                          </a>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Linkedin className="w-5 h-5 text-primary" />
-                          <a 
-                            href="https://linkedin.com/in/abdul-jeleel-alimi-1a2380219"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-foreground hover:text-primary transition-colors"
-                          >
-                            linkedin.com/in/abdul-jeleel-alimi-1a2380219
-                          </a>
-                        </div>
-                      </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
+                  <p className="text-foreground/80 mb-6">
+                    I'm always open to discussing new opportunities, interesting projects, 
+                    or just having a chat about technology and development.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-5 h-5 text-primary" />
+                      <a 
+                        href="mailto:alimiomotola20@gmail.com"
+                        className="text-foreground hover:text-primary transition-colors"
+                      >
+                        alimiomotola20@gmail.com
+                      </a>
                     </div>
-                    <div className="flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-24 h-24 mx-auto mb-4 bg-gradient-primary rounded-full flex items-center justify-center animate-glow">
-                          <Mail className="w-12 h-12 text-white" />
-                        </div>
-                        <p className="text-muted-foreground mb-4">Ready to start a project?</p>
-                        <Button 
-                          size="lg"
-                          className="bg-gradient-primary hover:shadow-glow"
-                          onClick={() => window.open('mailto:alimiomotola20@gmail.com', '_blank')}
-                        >
-                          Send Email
-                        </Button>
-                      </div>
+                    <div className="flex items-center gap-3">
+                      <Github className="w-5 h-5 text-primary" />
+                      <a 
+                        href="https://github.com/ragner01"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground hover:text-primary transition-colors"
+                      >
+                        github.com/ragner01
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Linkedin className="w-5 h-5 text-primary" />
+                      <a 
+                        href="https://linkedin.com/in/abdul-jeleel-alimi-1a2380219"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground hover:text-primary transition-colors"
+                      >
+                        linkedin.com/in/abdul-jeleel-alimi-1a2380219
+                      </a>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+                
+                <div className="flex gap-3">
+                  <Button 
+                    size="lg"
+                    className="bg-gradient-primary hover:shadow-glow"
+                    onClick={() => window.open('mailto:alimiomotola20@gmail.com', '_blank')}
+                  >
+                    <Mail className="w-5 h-5 mr-2" />
+                    Send Email
+                  </Button>
+                  <ResumeDownload />
+                </div>
+              </div>
+              
+              <ContactForm />
             </div>
           </div>
         </div>
@@ -474,6 +489,28 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-glass-border">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              Alimi Omotola
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-8">
+                <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
+                <a href="#skills" className="text-foreground hover:text-primary transition-colors">Skills</a>
+                <a href="#projects" className="text-foreground hover:text-primary transition-colors">Projects</a>
+                <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+                <a href="#testimonials" className="text-foreground hover:text-primary transition-colors">Testimonials</a>
+                <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
+              </div>
+              <ThemeToggle />
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
         {/* Animated background elements */}
@@ -534,6 +571,12 @@ const Index = () => {
 
       {/* Projects Section */}
       <ProjectsSection />
+
+      {/* Blog Section */}
+      <BlogSection />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
 
       {/* Contact Section */}
       <ContactSection />
