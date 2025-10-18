@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2 } from 'lucide-react';
+import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/use-scroll-animation';
@@ -84,14 +84,24 @@ const Index = () => {
       icon: <Code className="w-5 h-5" />
     },
     {
-      title: 'Enterprise Task Management Platform',
-      description: 'Comprehensive project management solution with real-time collaboration, Gantt charts, resource allocation, and advanced reporting. Supports teams up to 500+ members with role-based access control.',
-      tech: ['React', 'TypeScript', 'ASP.NET Core', 'SQL Server', 'SignalR', 'Azure'],
-      github: 'https://github.com/ragner01',
+      title: 'SmartRent - Property Management System',
+      description: 'Comprehensive property management system built for Nigerian landlords and tenants, featuring modern web technologies and Nigerian localization. Includes Next.js frontend, Spring Boot backend, and integrated payment processing.',
+      tech: ['Next.js 15', 'TypeScript', 'Spring Boot', 'Java 11', 'Material-UI', 'JWT', 'Docker'],
+      github: 'https://github.com/ragner01/SmartRent',
       demo: '#',
       category: 'Full-Stack',
-      highlights: ['Real-time collaboration', 'Advanced analytics', 'Enterprise-grade security'],
-      icon: <Code className="w-5 h-5" />
+      highlights: ['Nigerian Localization', 'JWT Authentication', 'Payment Integration', 'Mobile-First Design'],
+      icon: <Home className="w-5 h-5" />
+    },
+    {
+      title: 'Real-Time Analytics Dashboard',
+      description: 'Interactive business intelligence dashboard with live data visualization, custom report generation, and predictive analytics. Integrates with multiple data sources and APIs for comprehensive business insights.',
+      tech: ['React', 'TypeScript', 'ASP.NET Core', 'MongoDB', 'Chart.js', 'WebSocket'],
+      github: 'https://github.com/ragner01/Real-Time-Analytics-Dashboard',
+      demo: '#',
+      category: 'Data Visualization',
+      highlights: ['Real-time updates', 'Custom charts', 'Export capabilities', 'Predictive Analytics'],
+      icon: <BarChart3 className="w-5 h-5" />
     }
   ];
 
