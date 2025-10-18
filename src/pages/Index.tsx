@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare } from 'lucide-react';
+import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/use-scroll-animation';
@@ -23,6 +23,16 @@ const Index = () => {
   ];
 
   const projects = [
+    {
+      title: 'MicroJobs Marketplace - Enterprise Platform',
+      description: 'Production-ready multi-tenant micro-jobs marketplace built with Spring Boot, featuring Domain-Driven Design (DDD), Hexagonal Architecture, and Event Sourcing. Includes microservices, Kafka, PostgreSQL, Redis, Elasticsearch, Keycloak, and comprehensive testing.',
+      tech: ['Spring Boot', 'Java 11', 'Kafka', 'PostgreSQL', 'Redis', 'Elasticsearch', 'Keycloak', 'Docker', 'Kubernetes'],
+      github: 'https://github.com/ragner01/microjobs-marketplace',
+      demo: '#',
+      category: 'Enterprise Platform',
+      highlights: ['DDD Architecture', 'Event Sourcing', 'Microservices', 'Multi-tenant', 'Production Ready'],
+      icon: <Building2 className="w-5 h-5" />
+    },
     {
       title: 'InvoicePro - Invoice & Billing Management',
       description: 'A production-ready .NET 8 web application for managing invoices, clients, products, and payments with Clean Architecture principles. Features PDF generation, email integration, and comprehensive business analytics.',
