@@ -1,71 +1,42 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import emailjs from '@emailjs/browser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
-
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  subject: z.string().min(5, 'Subject must be at least 5 characters'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
 
 interface ContactFormProps {
   className?: string;
 }
 
 export const ContactForm = ({ className }: ContactFormProps) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const { elementRef, isVisible } = useScrollAnimation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
-
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setSubmitStatus('idle');
 
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
     try {
-      // EmailJS configuration - you'll need to set these up
-      const serviceId = 'YOUR_SERVICE_ID'; // Replace with your EmailJS service ID
-      const templateId = 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS template ID
-      const publicKey = 'YOUR_PUBLIC_KEY'; // Replace with your EmailJS public key
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString(),
+      });
 
-      // Prepare email parameters
-      const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        subject: data.subject,
-        message: data.message,
-        to_email: 'alimiomotola20@gmail.com', // Your email address
-      };
-
-      // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      
-      setSubmitStatus('success');
-      reset();
+      if (response.ok) {
+        setSubmitStatus('success');
+        form.reset();
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -81,7 +52,19 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           </p>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form 
+            name="contact" 
+            method="POST" 
+            data-netlify="true" 
+            netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p style={{ display: 'none' }}>
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
@@ -89,16 +72,12 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                 </label>
                 <Input
                   id="name"
+                  name="name"
+                  type="text"
+                  required
                   placeholder="Your name"
-                  {...register('name')}
                   className="border-glass-border focus:border-primary"
                 />
-                {errors.name && (
-                  <p className="text-sm text-destructive flex items-center gap-1">
-                    <AlertCircle className="w-4 h-4" />
-                    {errors.name.message}
-                  </p>
-                )}
               </div>
               
               <div className="space-y-2">
@@ -107,17 +86,12 @@ export const ContactForm = ({ className }: ContactFormProps) => {
                 </label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
+                  required
                   placeholder="your.email@example.com"
-                  {...register('email')}
                   className="border-glass-border focus:border-primary"
                 />
-                {errors.email && (
-                  <p className="text-sm text-destructive flex items-center gap-1">
-                    <AlertCircle className="w-4 h-4" />
-                    {errors.email.message}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -127,16 +101,12 @@ export const ContactForm = ({ className }: ContactFormProps) => {
               </label>
               <Input
                 id="subject"
+                name="subject"
+                type="text"
+                required
                 placeholder="What's this about?"
-                {...register('subject')}
                 className="border-glass-border focus:border-primary"
               />
-              {errors.subject && (
-                <p className="text-sm text-destructive flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.subject.message}
-                </p>
-              )}
             </div>
 
             <div className="space-y-2">
@@ -145,35 +115,20 @@ export const ContactForm = ({ className }: ContactFormProps) => {
               </label>
               <Textarea
                 id="message"
-                placeholder="Tell me about your project or how I can help..."
+                name="message"
+                required
                 rows={5}
-                {...register('message')}
+                placeholder="Tell me about your project or how I can help..."
                 className="border-glass-border focus:border-primary resize-none"
               />
-              {errors.message && (
-                <p className="text-sm text-destructive flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.message.message}
-                </p>
-              )}
             </div>
 
             <Button
               type="submit"
-              disabled={isSubmitting}
               className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                <>
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Message
-                </>
-              )}
+              <Send className="w-4 h-4 mr-2" />
+              Send Message
             </Button>
 
             {submitStatus === 'success' && (

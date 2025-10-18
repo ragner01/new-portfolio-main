@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/use-scroll-animation';
-import { ContactForm } from '@/components/ContactForm';
+import { ContactFormNetlify as ContactForm } from '@/components/ContactFormNetlify';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { ProjectFilter, ProjectCategory } from '@/components/ProjectFilter';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
