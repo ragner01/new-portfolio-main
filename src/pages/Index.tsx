@@ -9,7 +9,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { ProjectFilter, ProjectCategory } from '@/components/ProjectFilter';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { BlogSection } from '@/components/BlogSection';
-import { SEOHead } from '@/components/SEOHead';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -490,6 +490,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead />
+      <GoogleAnalytics />
       
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-glass-border">
