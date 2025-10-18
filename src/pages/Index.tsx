@@ -9,7 +9,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { ProjectFilter, ProjectCategory } from '@/components/ProjectFilter';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { BlogSection } from '@/components/BlogSection';
-import { ResumeDownload } from '@/components/ResumeDownload';
+import { SEOHead } from '@/components/SEOHead';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -489,6 +489,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead />
+      
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-glass-border">
         <div className="container mx-auto px-4 py-4">
@@ -512,7 +514,8 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+      <main>
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden" role="banner">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-20 w-32 h-32 bg-primary/20 rounded-full animate-parallax-float"></div>
@@ -563,23 +566,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <AboutSection />
+        {/* About Section */}
+        <AboutSection />
 
-      {/* Skills Section */}
-      <SkillsSection />
+        {/* Skills Section */}
+        <SkillsSection />
 
-      {/* Projects Section */}
-      <ProjectsSection />
+        {/* Projects Section */}
+        <ProjectsSection />
 
-      {/* Blog Section */}
-      <BlogSection />
+        {/* Blog Section */}
+        <BlogSection />
 
-      {/* Testimonials Section */}
-      <TestimonialsSection />
+        {/* Testimonials Section */}
+        <TestimonialsSection />
 
-      {/* Contact Section */}
-      <ContactSection />
+        {/* Contact Section */}
+        <ContactSection />
+      </main>
 
       {/* Footer */}
       <footer className="py-8 bg-background border-t border-glass-border">
