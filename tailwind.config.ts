@@ -219,14 +219,14 @@ export default {
 				'glow': 'glow 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite',
 				'skill-fill': 'skill-fill 2s ease-out forwards',
-				// Cinematic animations - Much slower and more dramatic
-				'slide-up': 'slide-up 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-				'slide-down': 'slide-down 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-				'slide-left': 'slide-left 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-				'slide-right': 'slide-right 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-				'zoom-in': 'zoom-in 3s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-				'flip-in': 'flip-in 2.8s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-				'parallax-float': 'parallax-float 12s ease-in-out infinite'
+				// Cinematic animations - Smooth and stable
+				'slide-up': 'slide-up 1.2s ease-out forwards',
+				'slide-down': 'slide-down 1.2s ease-out forwards',
+				'slide-left': 'slide-left 1.2s ease-out forwards',
+				'slide-right': 'slide-right 1.2s ease-out forwards',
+				'zoom-in': 'zoom-in 1.5s ease-out forwards',
+				'flip-in': 'flip-in 1.3s ease-out forwards',
+				'parallax-float': 'parallax-float 8s ease-in-out infinite'
 			},
 			transitionProperty: {
 				'smooth': 'var(--transition-smooth)',
