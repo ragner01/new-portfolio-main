@@ -5,7 +5,7 @@ export const ResumeDownload = () => {
   const handleDownload = () => {
     // Create a link to download the PDF file from the public folder
     const link = document.createElement('a');
-    link.href = '/resume.pdf'; // This will look for resume.pdf in the public folder
+    link.href = '/JELEEL NEW.pdf'; // Using your actual PDF file
     link.download = 'Alimi_Omotola_Resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
