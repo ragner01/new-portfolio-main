@@ -106,6 +106,33 @@ export const SEOHead = () => {
         "url": "https://github.com/ragner01/Real-Time-Analytics-Dashboard",
         "programmingLanguage": ["React", "TypeScript", "ASP.NET Core", "MongoDB"],
         "applicationCategory": "Data Visualization"
+      },
+      {
+        "@type": "CreativeWork",
+        "position": 5,
+        "name": "AtlasBank - Enterprise Fintech Platform",
+        "description": "Production-ready fintech platform built with .NET 8 for Tier-1 Nigerian banks with PCI DSS compliance",
+        "url": "https://github.com/ragner01/Atlas-bank",
+        "programmingLanguage": [".NET 8", "React Native", "PostgreSQL", "Kafka", "Kubernetes"],
+        "applicationCategory": "Enterprise Platform"
+      },
+      {
+        "@type": "CreativeWork",
+        "position": 6,
+        "name": "Nexus Chat - Real-Time Messaging Platform",
+        "description": "Modern full-stack chat application with real-time messaging capabilities",
+        "url": "https://github.com/ragner01/Nexus-Chat",
+        "programmingLanguage": ["React", "TypeScript", "Firebase"],
+        "applicationCategory": "Communication Platform"
+      },
+      {
+        "@type": "CreativeWork",
+        "position": 7,
+        "name": "Currency Converter - MVP Architecture Demo",
+        "description": "Java 17 Maven project demonstrating Model-View-Presenter (MVP) architecture with JavaFX",
+        "url": "https://github.com/ragner01/CurrencyConverter",
+        "programmingLanguage": ["Java 17", "Maven", "JavaFX"],
+        "applicationCategory": "Backend System"
       }
     ]
   };

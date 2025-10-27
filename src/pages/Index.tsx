@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3 } from 'lucide-react';
+import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3, DollarSign, Cloud, Server, Box, GitBranch, Shield, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/use-scroll-animation';
-import { ContactFormNetlify as ContactForm } from '@/components/ContactFormNetlify';
+import { ContactForm } from '@/components/ContactFormNetlify';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { ProjectFilter, ProjectCategory } from '@/components/ProjectFilter';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { BlogSection } from '@/components/BlogSection';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import { SEOHead } from '@/components/SEOHead';
+import { ResumeDownload } from '@/components/ResumeDownload';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,11 +22,34 @@ const Index = () => {
   }, []);
 
   const skills = [
+    // Frontend Technologies
     { name: 'React', level: 90, icon: <Code className="w-5 h-5" /> },
     { name: 'TypeScript', level: 85, icon: <Code className="w-5 h-5" /> },
     { name: 'JavaScript', level: 95, icon: <Code className="w-5 h-5" /> },
+    { name: 'Next.js', level: 80, icon: <Code className="w-5 h-5" /> },
+    
+    // Backend Technologies
     { name: 'Java', level: 80, icon: <Laptop className="w-5 h-5" /> },
-    { name: 'ASP.NET', level: 75, icon: <Database className="w-5 h-5" /> },
+    { name: 'ASP.NET Core', level: 75, icon: <Code className="w-5 h-5" /> },
+    { name: 'Spring Boot', level: 80, icon: <Server className="w-5 h-5" /> },
+    
+    // Databases
+    { name: 'SQL & SQL Server', level: 85, icon: <Database className="w-5 h-5" /> },
+    { name: 'PostgreSQL', level: 80, icon: <Database className="w-5 h-5" /> },
+    { name: 'MongoDB', level: 75, icon: <Database className="w-5 h-5" /> },
+    { name: 'Redis', level: 75, icon: <Database className="w-5 h-5" /> },
+    
+    // Cloud & DevOps
+    { name: 'Docker', level: 80, icon: <Box className="w-5 h-5" /> },
+    { name: 'Kubernetes', level: 75, icon: <Box className="w-5 h-5" /> },
+    { name: 'AWS', level: 75, icon: <Cloud className="w-5 h-5" /> },
+    { name: 'Azure', level: 70, icon: <Cloud className="w-5 h-5" /> },
+    { name: 'Kafka', level: 75, icon: <Zap className="w-5 h-5" /> },
+    
+    // Tools & Others
+    { name: 'Git & GitHub', level: 90, icon: <GitBranch className="w-5 h-5" /> },
+    
+    // Soft Skills
     { name: 'Project Management', level: 85, icon: <Target className="w-5 h-5" /> },
     { name: 'Team Leadership', level: 80, icon: <Users className="w-5 h-5" /> },
     { name: 'Communication', level: 90, icon: <MessageCircle className="w-5 h-5" /> },
@@ -110,6 +135,36 @@ const Index = () => {
       category: 'Data Visualization',
       highlights: ['Real-time updates', 'Custom charts', 'Export capabilities', 'Predictive Analytics'],
       icon: <BarChart3 className="w-5 h-5" />
+    },
+    {
+      title: 'AtlasBank - Enterprise Fintech Platform',
+      description: 'Production-ready fintech platform built with .NET 8 for Tier-1 Nigerian banks. Features microservices architecture, PCI DSS compliance, React Native mobile app, event-driven design with Kafka, and comprehensive observability with OpenTelemetry, Grafana, and Jaeger.',
+      tech: ['.NET 8', 'React Native', 'PostgreSQL', 'Kafka', 'Kubernetes', 'Docker', 'OpenTelemetry', 'Grafana', 'Jaeger'],
+      github: 'https://github.com/ragner01/Atlas-bank',
+      demo: '#',
+      category: 'Enterprise Platform',
+      highlights: ['PCI DSS Compliance', 'Microservices', 'Mobile App', 'Event-Driven', 'Banking Grade Security'],
+      icon: <Building2 className="w-5 h-5" />
+    },
+    {
+      title: 'Nexus Chat - Real-Time Messaging Platform',
+      description: 'Modern full-stack chat application with real-time messaging capabilities, user profiles, and multiple authentication methods. Built with React, TypeScript, and Firebase for seamless real-time communication.',
+      tech: ['React', 'TypeScript', 'Firebase', 'Tailwind CSS', 'React Router', 'Context API'],
+      github: 'https://github.com/ragner01/Nexus-Chat',
+      demo: '#',
+      category: 'Communication Platform',
+      highlights: ['Real-time messaging', 'Firebase integration', 'User authentication', 'Modern UI/UX'],
+      icon: <MessageCircle className="w-5 h-5" />
+    },
+    {
+      title: 'Currency Converter - MVP Architecture Demo',
+      description: 'A Java 17 Maven project demonstrating Model-View-Presenter (MVP) architecture with JavaFX user interface. Features mockable exchange rate service, clean architecture, and support for multiple currency conversions.',
+      tech: ['Java 17', 'Maven', 'JavaFX', 'MVP Architecture', 'Mockito', 'JUnit'],
+      github: 'https://github.com/ragner01/CurrencyConverter',
+      demo: '#',
+      category: 'Backend System',
+      highlights: ['MVP Architecture', 'JavaFX UI', 'Mockable services', 'Clean Architecture'],
+      icon: <DollarSign className="w-5 h-5" />
     }
   ];
 
@@ -230,7 +285,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div ref={gridRef} className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {skills.map((skill, index) => (
               <div
                 key={skill.name}
@@ -287,7 +342,7 @@ const Index = () => {
             projectCount={filteredProjects.length}
           />
 
-          <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div ref={gridRef} className="flex flex-col gap-8 max-w-4xl mx-auto">
             {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
@@ -295,7 +350,7 @@ const Index = () => {
                   visibleItems[index] ? 'animate-zoom-in opacity-100' : 'opacity-0'
                 }`}
               >
-                <Card className="bg-gradient-card backdrop-blur-sm border-glass-border shadow-card hover:shadow-glow transition-all duration-500 group h-full">
+                <Card className="bg-gradient-card backdrop-blur-sm border-glass-border shadow-card hover:shadow-glow transition-all duration-500 group">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-3">
                       <span className="px-2 py-1 bg-accent/20 text-accent rounded-md text-xs font-medium">
