@@ -354,19 +354,19 @@ const Index = () => {
             {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
-                className={`transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`transition-all duration-700 ease-out ${
                   visibleItems[index] 
                     ? 'translate-y-0 opacity-100' 
-                    : 'translate-y-20 opacity-0'
+                    : 'translate-y-10 opacity-0'
                 }`}
-                style={{ transitionDelay: `${index * 80}ms` }}
+                style={{ transitionDelay: `${index * 60}ms` }}
               >
                 <div className="relative group">
                   {/* Gradient background with animation */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-700 opacity-0 group-hover:opacity-100"></div>
                   
                   {/* Main content */}
-                  <div className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 border border-border/40 shadow-2xl hover:shadow-primary/20 transition-all duration-700 hover:border-primary/40 hover:-translate-y-2 h-full flex flex-col">
+                  <div className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 border border-border/40 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1 h-full flex flex-col">
                     {/* Header */}
                     <div className="flex items-center justify-between mb-4">
                       <span className="px-3 py-1 bg-primary/10 text-primary rounded-lg text-xs font-semibold border border-primary/20">

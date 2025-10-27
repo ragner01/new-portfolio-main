@@ -22,15 +22,21 @@ export const ContactForm = ({ className }: ContactFormProps) => {
     const formData = new FormData(form);
 
     try {
+      // Encode the form data properly
+      const encoded = new URLSearchParams(formData as any).toString();
+      
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString(),
+        body: encoded,
       });
 
       if (response.ok) {
         setSubmitStatus('success');
         form.reset();
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
       } else {
         setSubmitStatus('error');
       }
