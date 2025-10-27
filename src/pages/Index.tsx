@@ -23,36 +23,36 @@ const Index = () => {
 
   const skills = [
     // Frontend Technologies
-    { name: 'React', level: 90, icon: <Code className="w-5 h-5" /> },
-    { name: 'TypeScript', level: 85, icon: <Code className="w-5 h-5" /> },
+    { name: 'React', level: 92, icon: <Code className="w-5 h-5" /> },
+    { name: 'TypeScript', level: 88, icon: <Code className="w-5 h-5" /> },
     { name: 'JavaScript', level: 95, icon: <Code className="w-5 h-5" /> },
-    { name: 'Next.js', level: 80, icon: <Code className="w-5 h-5" /> },
+    { name: 'Next.js', level: 85, icon: <Code className="w-5 h-5" /> },
     
     // Backend Technologies
-    { name: 'Java', level: 80, icon: <Laptop className="w-5 h-5" /> },
-    { name: 'ASP.NET Core', level: 75, icon: <Code className="w-5 h-5" /> },
-    { name: 'Spring Boot', level: 80, icon: <Server className="w-5 h-5" /> },
+    { name: 'Java', level: 85, icon: <Laptop className="w-5 h-5" /> },
+    { name: 'ASP.NET Core', level: 80, icon: <Code className="w-5 h-5" /> },
+    { name: 'Spring Boot', level: 85, icon: <Server className="w-5 h-5" /> },
     
     // Databases
-    { name: 'SQL & SQL Server', level: 85, icon: <Database className="w-5 h-5" /> },
-    { name: 'PostgreSQL', level: 80, icon: <Database className="w-5 h-5" /> },
-    { name: 'MongoDB', level: 75, icon: <Database className="w-5 h-5" /> },
-    { name: 'Redis', level: 75, icon: <Database className="w-5 h-5" /> },
+    { name: 'SQL & SQL Server', level: 90, icon: <Database className="w-5 h-5" /> },
+    { name: 'PostgreSQL', level: 85, icon: <Database className="w-5 h-5" /> },
+    { name: 'MongoDB', level: 80, icon: <Database className="w-5 h-5" /> },
+    { name: 'Redis', level: 80, icon: <Database className="w-5 h-5" /> },
     
     // Cloud & DevOps
-    { name: 'Docker', level: 80, icon: <Box className="w-5 h-5" /> },
-    { name: 'Kubernetes', level: 75, icon: <Box className="w-5 h-5" /> },
-    { name: 'AWS', level: 75, icon: <Cloud className="w-5 h-5" /> },
-    { name: 'Azure', level: 70, icon: <Cloud className="w-5 h-5" /> },
-    { name: 'Kafka', level: 75, icon: <Zap className="w-5 h-5" /> },
+    { name: 'Docker', level: 85, icon: <Box className="w-5 h-5" /> },
+    { name: 'Kubernetes', level: 78, icon: <Box className="w-5 h-5" /> },
+    { name: 'AWS', level: 80, icon: <Cloud className="w-5 h-5" /> },
+    { name: 'Azure', level: 75, icon: <Cloud className="w-5 h-5" /> },
+    { name: 'Kafka', level: 82, icon: <Zap className="w-5 h-5" /> },
     
     // Tools & Others
-    { name: 'Git & GitHub', level: 90, icon: <GitBranch className="w-5 h-5" /> },
+    { name: 'Git { name: 'Git & GitHub', level: 90 GitHub', level: 92, icon: <GitBranch className="w-5 h-5" /> },
     
     // Soft Skills
-    { name: 'Project Management', level: 85, icon: <Target className="w-5 h-5" /> },
-    { name: 'Team Leadership', level: 80, icon: <Users className="w-5 h-5" /> },
-    { name: 'Communication', level: 90, icon: <MessageCircle className="w-5 h-5" /> },
+    { name: 'Project Management', level: 88, icon: <Target className="w-5 h-5" /> },
+    { name: 'Team Leadership', level: 85, icon: <Users className="w-5 h-5" /> },
+    { name: 'Communication', level: 93, icon: <MessageCircle className="w-5 h-5" /> },
   ];
 
   const projects = [
