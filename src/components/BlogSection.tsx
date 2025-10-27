@@ -384,81 +384,77 @@ export const BlogSection = () => {
           </p>
         </div>
 
-          <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div ref={gridRef} className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {blogPosts.map((post, index) => (
-              <div
+              <article
                 key={post.id}
                 className={`transition-all duration-700 ease-out ${
                   visibleItems[index] 
-                    ? 'translate-y-0 opacity-100' 
-                    : 'translate-y-10 opacity-0'
+                    ? 'translate-x-0 opacity-100' 
+                    : 'translate-x-10 opacity-0'
                 }`}
-                style={{ transitionDelay: `${index * 60}ms` }}
+                style={{ transitionDelay: `${index * 80}ms` }}
               >
-            <Card 
-                  className="bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl border border-border/40 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1 h-full flex flex-col group cursor-pointer"
+            <div 
+                  className="bg-gradient-to-r from-background/95 via-accent/5 to-background/95 backdrop-blur-xl rounded-2xl border-l-4 border-accent/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-l-accent p-6 group cursor-pointer relative overflow-hidden h-full"
                   onClick={() => handleReadMore(post)}
                 >
-                  {/* Header */}
-                  <CardHeader className="pb-3">
-                <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary" className="text-xs border-primary/20">
-                    {post.category}
-                  </Badge>
-                  {post.featured && (
-                        <Badge className="bg-gradient-to-r from-primary to-accent text-white text-xs">
-                      Featured
-                    </Badge>
-                  )}
-                </div>
-                    <CardTitle className="text-xl group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text transition-all duration-500 line-clamp-2">
-                  {post.title}
-                </CardTitle>
-              </CardHeader>
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
-                  <CardContent className="flex-grow flex flex-col">
-                    <p className="text-muted-foreground mb-4 leading-relaxed line-clamp-3 flex-grow">
-                  {post.excerpt}
-                </p>
-                
-                    {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs border-primary/20">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                    {/* Footer */}
-                    <div className="flex items-center justify-between pt-4 border-t border-border/40">
-                      <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  <div className="relative z-10">
+                    {/* Category and Date Row */}
+                    <div className="flex items-center justify-between mb-3">
+                      <Badge variant="secondary" className="text-xs bg-accent/20 text-accent border-accent/30">
+                        {post.category}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {post.readTime}
+                    
+                    {/* Title */}
+                    <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    
+                    {/* Excerpt */}
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    
+                    {/* Tags and Meta Row */}
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
+                        {post.tags.slice(0, 2).map((tag) => (
+                          <span key={tag} className="text-xs px-2 py-1 bg-background/60 rounded text-muted-foreground border border-border/50">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </div>
                     </div>
-                  </div>
-                  
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    className="group-hover:text-primary transition-colors"
+                    
+                    {/* Read More Button */}
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="mt-4 w-full text-accent hover:text-primary hover:bg-accent/10 border-t border-border/40 pt-4"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleReadMore(post);
                         }}
-                  >
-                        Read Article
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                    >
+                      Read Full Article
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-              </div>
+              </article>
           ))}
         </div>
         
