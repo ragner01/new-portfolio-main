@@ -318,7 +318,7 @@ const Index = () => {
 
   const ProjectsSection = () => {
     const { elementRef: projectsRef, isVisible: projectsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 300);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 150);
 
     return (
       <section className="py-20 bg-background relative overflow-hidden">
