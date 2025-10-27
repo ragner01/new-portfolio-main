@@ -321,7 +321,7 @@ const Index = () => {
     const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 300);
 
     return (
-      <section className="py-32 bg-gradient-to-b from-background via-transparent to-background relative overflow-hidden">
+      <section className="py-20 bg-background relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
@@ -350,7 +350,7 @@ const Index = () => {
             projectCount={filteredProjects.length}
           />
 
-          <div ref={gridRef} className="flex flex-col gap-24 max-w-7xl mx-auto px-4">
+          <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
@@ -366,82 +366,69 @@ const Index = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-700 opacity-0 group-hover:opacity-100"></div>
                   
                   {/* Main content */}
-                  <div className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-border/50 shadow-2xl hover:shadow-primary/10 transition-all duration-700 hover:border-primary/30 hover:-translate-y-1">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-6">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center backdrop-blur-sm border border-primary/20 group-hover:scale-110 transition-transform duration-500">
-                            {project.icon}
-                          </div>
-                          <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20 backdrop-blur-sm">
-                            {project.category}
-                          </span>
-                        </div>
-                        
-                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-black mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text transition-all duration-500">
-                          {project.title}
-                        </h3>
-                        
-                        <p className="text-muted-foreground leading-relaxed text-base">
-                          {project.description}
-                        </p>
+                  <div className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 border border-border/40 shadow-2xl hover:shadow-primary/20 transition-all duration-700 hover:border-primary/40 hover:-translate-y-2 h-full flex flex-col">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-lg text-xs font-semibold border border-primary/20">
+                        {project.category}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center border border-primary/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                        {project.icon}
                       </div>
                     </div>
                     
-                    {/* Highlights with animation */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-foreground/90 mb-3 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                        Key Features
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.highlights.map((highlight) => (
-                          <span 
-                            key={highlight}
-                            className="px-3 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 text-sm border border-primary/20 rounded-lg backdrop-blur-sm hover:border-primary/40 hover:scale-105 transition-all duration-300"
-                          >
-                            {highlight}
-                          </span>
-                        ))}
-                      </div>
+                    {/* Title */}
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text transition-all duration-500 line-clamp-2">
+                      {project.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed text-sm mb-6 flex-grow line-clamp-3">
+                      {project.description}
+                    </p>
+                    
+                    {/* Highlights */}
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {project.highlights.slice(0, 3).map((highlight) => (
+                        <span 
+                          key={highlight}
+                          className="px-2 py-1 bg-primary/10 text-xs rounded-md border border-primary/20"
+                        >
+                          {highlight}
+                        </span>
+                      ))}
                     </div>
                     
-                    {/* Tech Stack with icons */}
-                    <div className="mb-8">
-                      <h4 className="text-sm font-semibold text-foreground/90 mb-3 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                        Tech Stack
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.map((tech) => (
-                          <span 
-                            key={tech} 
-                            className="px-3 py-1.5 bg-background/50 text-sm border border-border/50 rounded-lg hover:border-accent/50 hover:bg-accent/5 transition-all duration-300"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                    {/* Tech Stack */}
+                    <div className="mb-6 flex flex-wrap gap-2">
+                      {project.tech.slice(0, 5).map((tech) => (
+                        <span 
+                          key={tech} 
+                          className="px-2 py-1 bg-background/60 text-xs rounded border border-border/50"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                     
                     {/* Action buttons */}
-                    <div className="flex gap-3">
+                    <div className="flex gap-2 mt-auto">
                       <Button 
-                        size="default" 
+                        size="sm" 
                         variant="outline" 
-                        className="flex-1 border-2 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 hover:scale-105"
+                        className="flex-1"
                         onClick={() => window.open(project.github, '_blank')}
                       >
                         <Github className="w-4 h-4 mr-2" />
-                        View Code
+                        Code
                       </Button>
                       <Button 
-                        size="default" 
-                        className="flex-1 bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
+                        size="sm" 
+                        className="flex-1 bg-gradient-to-r from-primary to-accent"
                         onClick={() => window.open(project.demo, '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Live Demo
+                        Demo
                       </Button>
                     </div>
                   </div>
