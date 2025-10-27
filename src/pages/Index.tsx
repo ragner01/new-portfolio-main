@@ -354,12 +354,12 @@ const Index = () => {
             {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
-                className={`transition-all duration-700 ease-out ${
+                className={`transition-all duration-1000 ${
                   visibleItems[index] 
-                    ? 'translate-y-0 opacity-100' 
-                    : 'translate-y-10 opacity-0'
+                    ? 'animate-slide-down opacity-100' 
+                    : 'opacity-0'
                 }`}
-                style={{ transitionDelay: `${index * 60}ms` }}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative group">
                   {/* Gradient background with animation */}
