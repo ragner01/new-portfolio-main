@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3, DollarSign, Cloud, Server, Box, GitBranch, Shield, Zap } from 'lucide-react';
+import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3, DollarSign, Cloud, Server, Box, GitBranch, Shield, Zap, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -56,6 +56,26 @@ const Index = () => {
   ];
 
   const projects = [
+    {
+      title: 'AtlasBank - Enterprise Fintech Platform',
+      description: 'Production-ready fintech platform built with .NET 8 for Tier-1 Nigerian banks. Features microservices architecture, PCI DSS compliance, React Native mobile app, event-driven design with Kafka, and comprehensive observability with OpenTelemetry, Grafana, and Jaeger.',
+      tech: ['.NET 8', 'React Native', 'PostgreSQL', 'Kafka', 'Kubernetes', 'Docker', 'OpenTelemetry', 'Grafana', 'Jaeger'],
+      github: 'https://github.com/ragner01/Atlas-bank',
+      demo: '#',
+      category: 'Enterprise Platform',
+      highlights: ['PCI DSS Compliance', 'Microservices', 'Mobile App', 'Event-Driven', 'Banking Grade Security'],
+      icon: <Building2 className="w-5 h-5" />
+    },
+    {
+      title: 'OSUTH - Hospital Information System',
+      description: 'Production-ready hospital information system for Nigeria featuring multi-facility support, FHIR interoperability, enterprise-grade security. Comprehensive EMR with patient management, appointments, lab/radiology orders, billing, pharmacy, and operational analytics.',
+      tech: ['Spring Boot', 'React', 'PostgreSQL', 'Docker', 'Kubernetes', 'FHIR R4', 'Keycloak', 'AWS', 'Terraform'],
+      github: 'https://github.com/ragner01/OSUTH',
+      demo: '#',
+      category: 'Enterprise Platform',
+      highlights: ['FHIR Interoperability', 'Multi-Facility', 'Clinical Workflows', 'NHIA/HMO Claims', 'Production Ready'],
+      icon: <Stethoscope className="w-5 h-5" />
+    },
     {
       title: 'MicroJobs Marketplace - Enterprise Platform',
       description: 'Production-ready multi-tenant micro-jobs marketplace built with Spring Boot, featuring Domain-Driven Design (DDD), Hexagonal Architecture, and Event Sourcing. Includes microservices, Kafka, PostgreSQL, Redis, Elasticsearch, Keycloak, and comprehensive testing.',
@@ -127,6 +147,16 @@ const Index = () => {
       icon: <Home className="w-5 h-5" />
     },
     {
+      title: 'Currency Converter - MVP Architecture Demo',
+      description: 'A Java 17 Maven project demonstrating Model-View-Presenter (MVP) architecture with JavaFX user interface. Features mockable exchange rate service, clean architecture, and support for multiple currency conversions.',
+      tech: ['Java 17', 'Maven', 'JavaFX', 'MVP Architecture', 'Mockito', 'JUnit'],
+      github: 'https://github.com/ragner01/CurrencyConverter',
+      demo: '#',
+      category: 'Backend System',
+      highlights: ['MVP Architecture', 'JavaFX UI', 'Mockable services', 'Clean Architecture'],
+      icon: <DollarSign className="w-5 h-5" />
+    },
+    {
       title: 'Real-Time Analytics Dashboard',
       description: 'Interactive business intelligence dashboard with live data visualization, custom report generation, and predictive analytics. Integrates with multiple data sources and APIs for comprehensive business insights.',
       tech: ['React', 'TypeScript', 'ASP.NET Core', 'MongoDB', 'Chart.js', 'WebSocket'],
@@ -137,14 +167,34 @@ const Index = () => {
       icon: <BarChart3 className="w-5 h-5" />
     },
     {
-      title: 'AtlasBank - Enterprise Fintech Platform',
-      description: 'Production-ready fintech platform built with .NET 8 for Tier-1 Nigerian banks. Features microservices architecture, PCI DSS compliance, React Native mobile app, event-driven design with Kafka, and comprehensive observability with OpenTelemetry, Grafana, and Jaeger.',
-      tech: ['.NET 8', 'React Native', 'PostgreSQL', 'Kafka', 'Kubernetes', 'Docker', 'OpenTelemetry', 'Grafana', 'Jaeger'],
-      github: 'https://github.com/ragner01/Atlas-bank',
-      demo: '#',
-      category: 'Enterprise Platform',
-      highlights: ['PCI DSS Compliance', 'Microservices', 'Mobile App', 'Event-Driven', 'Banking Grade Security'],
-      icon: <Building2 className="w-5 h-5" />
+      title: 'TaxGuru NG - Nigerian Tax Calculator',
+      description: 'A comprehensive Nigerian tax calculation platform built with React, TypeScript, and Tailwind CSS. Provides accurate, FIRS-compliant tax calculations for individuals and businesses with real-time calculations and educational resources.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vite', 'Netlify'],
+      github: 'https://github.com/ragner01/taxguru-ng',
+      demo: 'https://taxesguru.netlify.app/',
+      category: 'Tax Calculator',
+      highlights: ['FIRS Compliant', 'Real-time calculations', 'Educational content', 'Mobile responsive'],
+      icon: <Code className="w-5 h-5" />
+    },
+    {
+      title: 'E-School Nigeria Portal',
+      description: 'A comprehensive educational portal for Nigerian schools built with React and TypeScript. Features include student management, course tracking, and modern UI/UX design.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vite', 'Netlify'],
+      github: 'https://github.com/ragner01/e-school-nigeria-portal',
+      demo: 'https://e-school-nigeria.netlify.app/',
+      category: 'Educational Platform',
+      highlights: ['Student management', 'Course tracking', 'Modern UI/UX', 'Responsive design'],
+      icon: <Code className="w-5 h-5" />
+    },
+    {
+      title: 'Naija Stock Radar',
+      description: 'A stock market tracking and analysis platform for Nigerian stocks. Provides real-time market data, portfolio management, and investment insights for the Nigerian stock market.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vite', 'Netlify'],
+      github: 'https://github.com/ragner01/naija-stock-radar',
+      demo: 'https://naija-stock.netlify.app/',
+      category: 'Financial Platform',
+      highlights: ['Real-time data', 'Portfolio tracking', 'Market analysis', 'Investment insights'],
+      icon: <Code className="w-5 h-5" />
     },
     {
       title: 'Nexus Chat - Real-Time Messaging Platform',
@@ -155,16 +205,6 @@ const Index = () => {
       category: 'Communication Platform',
       highlights: ['Real-time messaging', 'Firebase integration', 'User authentication', 'Modern UI/UX'],
       icon: <MessageCircle className="w-5 h-5" />
-    },
-    {
-      title: 'Currency Converter - MVP Architecture Demo',
-      description: 'A Java 17 Maven project demonstrating Model-View-Presenter (MVP) architecture with JavaFX user interface. Features mockable exchange rate service, clean architecture, and support for multiple currency conversions.',
-      tech: ['Java 17', 'Maven', 'JavaFX', 'MVP Architecture', 'Mockito', 'JUnit'],
-      github: 'https://github.com/ragner01/CurrencyConverter',
-      demo: '#',
-      category: 'Backend System',
-      highlights: ['MVP Architecture', 'JavaFX UI', 'Mockable services', 'Clean Architecture'],
-      icon: <DollarSign className="w-5 h-5" />
     }
   ];
 
@@ -359,7 +399,7 @@ const Index = () => {
                     ? 'animate-slide-down opacity-100' 
                     : 'opacity-0'
                 }`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="relative group">
                   {/* Gradient background with animation */}
