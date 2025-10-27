@@ -465,10 +465,11 @@ const Index = () => {
                       <Button 
                         size="sm" 
                         className="flex-1 bg-gradient-to-r from-primary to-accent"
-                        onClick={() => window.open(project.demo, '_blank')}
+                        onClick={() => project.demo !== '#' ? window.open(project.demo, '_blank') : null}
+                        disabled={project.demo === '#'}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Demo
+                        {project.demo !== '#' ? 'Demo' : 'Coming Soon'}
                       </Button>
                     </div>
                   </div>
