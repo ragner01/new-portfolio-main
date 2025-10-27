@@ -321,7 +321,7 @@ const Index = () => {
     const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 300);
 
     return (
-      <section className="py-20 bg-gradient-to-b from-background via-background/95 to-background relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-b from-background via-transparent to-background relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
@@ -350,7 +350,7 @@ const Index = () => {
             projectCount={filteredProjects.length}
           />
 
-          <div ref={gridRef} className="flex flex-col gap-20 max-w-6xl mx-auto">
+          <div ref={gridRef} className="flex flex-col gap-24 max-w-7xl mx-auto px-4">
             {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
