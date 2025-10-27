@@ -47,7 +47,7 @@ const Index = () => {
     { name: 'Kafka', level: 82, icon: <Zap className="w-5 h-5" /> },
     
     // Tools & Others
-    { name: 'Git { name: 'Git & GitHub', level: 90 GitHub', level: 92, icon: <GitBranch className="w-5 h-5" /> },
+    { name: 'Git & GitHub', level: 92, icon: <GitBranch className="w-5 h-5" /> },
     
     // Soft Skills
     { name: 'Project Management', level: 88, icon: <Target className="w-5 h-5" /> },
