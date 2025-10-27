@@ -318,18 +318,26 @@ const Index = () => {
 
   const ProjectsSection = () => {
     const { elementRef: projectsRef, isVisible: projectsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 250);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredProjects.length, 300);
 
     return (
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-b from-background via-background/95 to-background relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div 
             ref={projectsRef}
             className={`text-center mb-16 transition-all duration-1000 ${
-              projectsVisible ? 'animate-flip-in opacity-100' : 'opacity-0'
+              projectsVisible ? 'animate-slide-down opacity-100' : 'opacity-0'
             }`}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Featured Projects
+            </h2>
             <p className="text-xl text-muted-foreground">
               Some of my recent work and personal projects
             </p>
@@ -342,41 +350,55 @@ const Index = () => {
             projectCount={filteredProjects.length}
           />
 
-          <div ref={gridRef} className="flex flex-col gap-8 max-w-4xl mx-auto">
+          <div ref={gridRef} className="flex flex-col gap-12 max-w-5xl mx-auto">
             {filteredProjects.map((project, index) => (
               <div
                 key={project.title}
-                className={`transition-all duration-500 ${
-                  visibleItems[index] ? 'animate-zoom-in opacity-100' : 'opacity-0'
+                className={`transition-all duration-[600ms] ease-out ${
+                  visibleItems[index] 
+                    ? 'translate-y-0 opacity-100 scale-100' 
+                    : 'translate-y-12 opacity-0 scale-95'
                 }`}
+                style={{ transitionDelay: `${index * 50}ms` }}
               >
-                <Card className="bg-gradient-card backdrop-blur-sm border-glass-border shadow-card hover:shadow-glow transition-all duration-500 group">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="px-2 py-1 bg-accent/20 text-accent rounded-md text-xs font-medium">
-                        {project.category}
-                      </span>
-                      <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                        {project.icon}
+                <div className="relative group">
+                  {/* Gradient background with animation */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-700 opacity-0 group-hover:opacity-100"></div>
+                  
+                  {/* Main content */}
+                  <div className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-border/50 shadow-2xl hover:shadow-primary/10 transition-all duration-700 hover:border-primary/30 hover:-translate-y-1">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-6">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center backdrop-blur-sm border border-primary/20 group-hover:scale-110 transition-transform duration-500">
+                            {project.icon}
+                          </div>
+                          <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20 backdrop-blur-sm">
+                            {project.category}
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-primary transition-colors duration-500">
+                          {project.title}
+                        </h3>
+                        
+                        <p className="text-muted-foreground leading-relaxed text-base">
+                          {project.description}
+                        </p>
                       </div>
                     </div>
                     
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                      {project.description}
-                    </p>
-                    
-                    {/* Highlights */}
-                    <div className="mb-4">
-                      <h4 className="text-xs font-semibold text-foreground/80 mb-2">Key Features:</h4>
-                      <div className="flex flex-wrap gap-1">
+                    {/* Highlights with animation */}
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-foreground/90 mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                        Key Features
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
                         {project.highlights.map((highlight) => (
                           <span 
                             key={highlight}
-                            className="px-2 py-1 bg-primary/5 text-primary border border-primary/20 rounded text-xs"
+                            className="px-3 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 text-sm border border-primary/20 rounded-lg backdrop-blur-sm hover:border-primary/40 hover:scale-105 transition-all duration-300"
                           >
                             {highlight}
                           </span>
@@ -384,14 +406,17 @@ const Index = () => {
                       </div>
                     </div>
                     
-                    {/* Tech Stack */}
-                    <div className="mb-6">
-                      <h4 className="text-xs font-semibold text-foreground/80 mb-2">Tech Stack:</h4>
+                    {/* Tech Stack with icons */}
+                    <div className="mb-8">
+                      <h4 className="text-sm font-semibold text-foreground/90 mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                        Tech Stack
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tech) => (
                           <span 
                             key={tech} 
-                            className="px-3 py-1 bg-secondary/50 text-secondary-foreground rounded-full text-xs border border-secondary"
+                            className="px-3 py-1.5 bg-background/50 text-sm border border-border/50 rounded-lg hover:border-accent/50 hover:bg-accent/5 transition-all duration-300"
                           >
                             {tech}
                           </span>
@@ -399,27 +424,28 @@ const Index = () => {
                       </div>
                     </div>
                     
+                    {/* Action buttons */}
                     <div className="flex gap-3">
                       <Button 
-                        size="sm" 
+                        size="default" 
                         variant="outline" 
-                        className="flex-1 border-glass-border hover:bg-glass-bg transition-all duration-300"
+                        className="flex-1 border-2 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 hover:scale-105"
                         onClick={() => window.open(project.github, '_blank')}
                       >
                         <Github className="w-4 h-4 mr-2" />
                         View Code
                       </Button>
                       <Button 
-                        size="sm" 
-                        className="flex-1 bg-gradient-primary hover:shadow-primary transition-all duration-300"
+                        size="default" 
+                        className="flex-1 bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
                         onClick={() => window.open(project.demo, '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Live Demo
                       </Button>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
