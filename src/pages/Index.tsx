@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3, DollarSign, Cloud, Server, Box, GitBranch, Shield, Zap, Stethoscope } from 'lucide-react';
+import { Github, Mail, ExternalLink, Code, Database, Laptop, Users, Target, MessageCircle, Linkedin, FileText, CheckSquare, Building2, Home, BarChart3, DollarSign, Cloud, Server, Box, GitBranch, Shield, Zap, Stethoscope, Factory } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -75,6 +75,16 @@ const Index = () => {
       category: 'Enterprise Platform',
       highlights: ['FHIR Interoperability', 'Multi-Facility', 'Clinical Workflows', 'NHIA/HMO Claims', 'Production Ready'],
       icon: <Stethoscope className="w-5 h-5" />
+    },
+    {
+      title: 'DeltaGrid - Oil & Gas Operations Platform',
+      description: 'Enterprise Nigerian upstream O&G operations platform featuring ingestion, allocation, integrity management, PTW, events, optimization, custody transfer, lab management, digital twin, leak detection. Includes Blazor Ops Console, MAUI Field App, API Gateway, observability, data lakehouse, and MLOps capabilities.',
+      tech: ['.NET', 'Blazor Server', '.NET MAUI', 'Azure', 'PostgreSQL', 'Azure Data Lake', 'Delta Lake', 'OpenTelemetry', 'YARP', 'MLOps'],
+      github: 'https://github.com/ragner01/DeltaGrid',
+      demo: '#',
+      category: 'Enterprise Platform',
+      highlights: ['Digital Twin', 'MLOps', 'Data Lakehouse', 'Offline-First MAUI', 'Production Ready'],
+      icon: <Factory className="w-5 h-5" />
     },
     {
       title: 'MicroJobs Marketplace - Enterprise Platform',
