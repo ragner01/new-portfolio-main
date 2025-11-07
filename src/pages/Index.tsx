@@ -12,10 +12,13 @@ import { BlogSection } from '@/components/BlogSection';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { SEOHead } from '@/components/SEOHead';
 import { ResumeDownload } from '@/components/ResumeDownload';
+import { ProjectDetailModal, ProjectDetail } from '@/components/ProjectDetailModal';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All');
+  const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   useEffect(() => {
     setIsVisible(true);
@@ -55,7 +58,12 @@ const Index = () => {
     { name: 'Communication', level: 93, icon: <MessageCircle className="w-5 h-5" /> },
   ];
 
-  const projects = [
+  const handleProjectClick = (project: ProjectDetail) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const projects: ProjectDetail[] = [
     {
       title: 'AtlasBank - Enterprise Fintech Platform',
       description: 'Production-ready fintech platform built with .NET 8 for Tier-1 Nigerian banks. Features microservices architecture, PCI DSS compliance, React Native mobile app, event-driven design with Kafka, and comprehensive observability with OpenTelemetry, Grafana, and Jaeger.',
@@ -64,7 +72,44 @@ const Index = () => {
       demo: '#',
       category: 'Enterprise Platform',
       highlights: ['PCI DSS Compliance', 'Microservices', 'Mobile App', 'Event-Driven', 'Banking Grade Security'],
-      icon: <Building2 className="w-5 h-5" />
+      icon: <Building2 className="w-5 h-5" />,
+      architecture: {
+        overview: 'Built on a microservices architecture with domain-driven design principles. Each service is independently deployable and scalable, communicating through event-driven messaging via Kafka. The platform follows Clean Architecture with clear separation of concerns between domain, application, and infrastructure layers.',
+        keyComponents: [
+          'API Gateway for routing and load balancing',
+          'Authentication & Authorization Service (JWT-based)',
+          'Account Management Service',
+          'Transaction Processing Service',
+          'Payment Gateway Integration Service',
+          'Notification Service',
+          'React Native mobile application',
+          'Admin Dashboard (Blazor Server)'
+        ],
+        designPatterns: ['Microservices', 'Event-Driven Architecture', 'CQRS', 'Repository Pattern', 'Dependency Injection', 'Clean Architecture'],
+        infrastructure: ['Kubernetes for orchestration', 'Docker containers', 'PostgreSQL for data persistence', 'Redis for caching', 'Kafka for event streaming', 'OpenTelemetry for observability']
+      },
+      conception: {
+        problem: 'Nigerian banks needed a modern, scalable fintech platform that could handle high transaction volumes, ensure PCI DSS compliance, and provide real-time transaction processing with comprehensive monitoring and observability.',
+        solution: 'Developed a production-ready microservices platform using .NET 8 with event-driven architecture, ensuring scalability, security, and compliance. Integrated React Native for mobile banking and comprehensive observability stack for real-time monitoring.',
+        approach: 'Adopted a phased approach starting with core banking services, followed by payment integrations, mobile app development, and comprehensive observability. Used Domain-Driven Design to model complex banking domains and implemented event sourcing for critical transaction flows.'
+      },
+      achievements: {
+        businessValue: [
+          'Enabled Tier-1 banks to process millions of transactions daily',
+          'Achieved PCI DSS Level 1 compliance',
+          'Reduced transaction processing time by 60%',
+          'Improved system uptime to 99.9%',
+          'Enabled real-time fraud detection and prevention'
+        ],
+        technicalAchievements: [
+          'Implemented event-driven architecture with Kafka for high throughput',
+          'Achieved horizontal scalability with Kubernetes',
+          'Built comprehensive observability with OpenTelemetry, Grafana, and Jaeger',
+          'Developed React Native mobile app with offline capabilities',
+          'Implemented distributed tracing for end-to-end visibility'
+        ],
+        impact: 'The platform successfully handles millions of transactions daily for Tier-1 Nigerian banks, providing a secure, scalable, and compliant fintech solution that meets international banking standards while addressing local market needs.'
+      }
     },
     {
       title: 'OSUTH - Hospital Information System',
@@ -74,7 +119,45 @@ const Index = () => {
       demo: '#',
       category: 'Enterprise Platform',
       highlights: ['FHIR Interoperability', 'Multi-Facility', 'Clinical Workflows', 'NHIA/HMO Claims', 'Production Ready'],
-      icon: <Stethoscope className="w-5 h-5" />
+      icon: <Stethoscope className="w-5 h-5" />,
+      architecture: {
+        overview: 'Built on Spring Boot microservices architecture with React frontend. The system follows hexagonal architecture principles, ensuring clean separation between business logic and infrastructure. FHIR R4 standard is used for healthcare data interoperability, enabling seamless integration with other healthcare systems.',
+        keyComponents: [
+          'Patient Management Service',
+          'Appointment Scheduling Service',
+          'Clinical Documentation Service',
+          'Laboratory & Radiology Service',
+          'Pharmacy Management Service',
+          'Billing & Claims Service',
+          'NHIA/HMO Integration Service',
+          'FHIR Gateway for interoperability',
+          'React-based EMR frontend'
+        ],
+        designPatterns: ['Microservices', 'Hexagonal Architecture', 'Domain-Driven Design', 'CQRS', 'Event Sourcing', 'API Gateway Pattern'],
+        infrastructure: ['Kubernetes for container orchestration', 'AWS EKS for managed Kubernetes', 'PostgreSQL for primary data store', 'Redis for session management', 'Keycloak for identity management', 'Terraform for infrastructure as code']
+      },
+      conception: {
+        problem: 'Nigerian hospitals needed a comprehensive, interoperable hospital information system that could support multiple facilities, integrate with NHIA/HMO systems, and comply with healthcare data standards while providing modern clinical workflows.',
+        solution: 'Developed a production-ready HIS using Spring Boot and React, implementing FHIR R4 standards for interoperability, multi-tenant architecture for multi-facility support, and comprehensive clinical workflows including EMR, lab, radiology, pharmacy, and billing modules.',
+        approach: 'Started with core patient management and clinical documentation, then expanded to include lab/radiology, pharmacy, and billing. Implemented FHIR R4 early to ensure interoperability. Used Keycloak for enterprise-grade authentication and authorization, and Terraform for infrastructure automation.'
+      },
+      achievements: {
+        businessValue: [
+          'Enabled multi-facility hospital operations',
+          'Streamlined clinical workflows reducing documentation time by 40%',
+          'Automated NHIA/HMO claims processing',
+          'Improved patient data accessibility across facilities',
+          'Enhanced compliance with healthcare data standards'
+        ],
+        technicalAchievements: [
+          'Implemented FHIR R4 for healthcare interoperability',
+          'Built multi-tenant architecture supporting multiple facilities',
+          'Achieved enterprise-grade security with Keycloak',
+          'Developed comprehensive EMR with clinical workflows',
+          'Automated infrastructure deployment with Terraform'
+        ],
+        impact: 'The system successfully supports multiple hospital facilities in Nigeria, providing seamless patient care coordination, automated claims processing, and FHIR-compliant data exchange, significantly improving healthcare delivery efficiency.'
+      }
     },
     {
       title: 'DeltaGrid - Oil & Gas Operations Platform',
@@ -84,7 +167,49 @@ const Index = () => {
       demo: '#',
       category: 'Enterprise Platform',
       highlights: ['Digital Twin', 'MLOps', 'Data Lakehouse', 'Offline-First MAUI', 'Production Ready'],
-      icon: <Factory className="w-5 h-5" />
+      icon: <Factory className="w-5 h-5" />,
+      architecture: {
+        overview: 'Comprehensive O&G operations platform built on .NET with Blazor Server for operations console and .NET MAUI for field applications. The architecture follows a medallion data lakehouse pattern (Raw → Curated → Marts) using Azure Data Lake Storage and Delta Lake. YARP serves as the API Gateway with versioning and canary deployment support.',
+        keyComponents: [
+          'Blazor Server Operations Console',
+          '.NET MAUI Field Application (offline-first)',
+          'YARP API Gateway with versioning',
+          'Allocation Engine',
+          'Integrity Management System',
+          'PTW (Permit to Work) Module',
+          'Event & Alarm Processing',
+          'Custody Transfer System',
+          'Lab Management System',
+          'Digital Twin with graph queries',
+          'Leak Detection (statistical volume balance)',
+          'MLOps Pipeline for predictive maintenance'
+        ],
+        designPatterns: ['Medallion Architecture', 'CQRS', 'Event Sourcing', 'Domain-Driven Design', 'Hexagonal Architecture', 'API Gateway Pattern'],
+        infrastructure: ['Azure Kubernetes Service (AKS)', 'Azure Data Lake Storage Gen2', 'Delta Lake for data versioning', 'PostgreSQL for transactional data', 'Azure Cognitive Search', 'OpenTelemetry for observability', 'MLOps with ONNX models']
+      },
+      conception: {
+        problem: 'Nigerian upstream operators needed a unified platform to manage complex O&G operations including allocation, integrity management, custody transfer, and field operations. The system needed to work offline in remote locations and provide real-time insights through digital twin technology.',
+        solution: 'Developed a comprehensive operations platform with Blazor Server for centralized operations, .NET MAUI for offline field operations, and a data lakehouse architecture for analytics. Implemented MLOps for predictive maintenance and digital twin for asset visualization.',
+        approach: 'Adopted a phased approach starting with core operations (allocation, integrity), then expanding to field operations (PTW, lab management), followed by advanced capabilities (digital twin, MLOps). Used medallion architecture for data processing and Delta Lake for versioning. Implemented offline-first MAUI app with vector clocks for conflict resolution.'
+      },
+      achievements: {
+        businessValue: [
+          'Streamlined O&G operations across multiple facilities',
+          'Improved allocation accuracy by 95%',
+          'Reduced downtime through predictive maintenance',
+          'Enabled offline field operations in remote locations',
+          'Enhanced decision-making with digital twin visualization'
+        ],
+        technicalAchievements: [
+          'Built offline-first MAUI app with conflict resolution',
+          'Implemented medallion data lakehouse architecture',
+          'Developed MLOps pipeline for model deployment',
+          'Created digital twin with graph-based queries',
+          'Achieved real-time leak detection using statistical methods',
+          'Built comprehensive observability with OpenTelemetry'
+        ],
+        impact: 'The platform successfully manages complex upstream O&G operations in Nigeria, providing real-time insights, offline field capabilities, and predictive maintenance, significantly improving operational efficiency and safety.'
+      }
     },
     {
       title: 'MicroJobs Marketplace - Enterprise Platform',
@@ -94,7 +219,44 @@ const Index = () => {
       demo: '#',
       category: 'Enterprise Platform',
       highlights: ['DDD Architecture', 'Event Sourcing', 'Microservices', 'Multi-tenant', 'Production Ready'],
-      icon: <Building2 className="w-5 h-5" />
+      icon: <Building2 className="w-5 h-5" />,
+      architecture: {
+        overview: 'Built on Spring Boot microservices architecture with Domain-Driven Design principles. The system follows hexagonal architecture ensuring clean separation between business logic and infrastructure. Event Sourcing is used for critical business events, providing complete audit trail and enabling event replay.',
+        keyComponents: [
+          'User Management Service',
+          'Job Posting Service',
+          'Bidding & Matching Service',
+          'Payment Processing Service',
+          'Notification Service',
+          'Search Service (Elasticsearch)',
+          'Multi-tenant Gateway',
+          'Event Store for event sourcing'
+        ],
+        designPatterns: ['Domain-Driven Design', 'Hexagonal Architecture', 'Event Sourcing', 'CQRS', 'Microservices', 'Multi-tenancy'],
+        infrastructure: ['Kubernetes for orchestration', 'Docker containers', 'PostgreSQL for data persistence', 'Redis for caching', 'Kafka for event streaming', 'Elasticsearch for search', 'Keycloak for identity management']
+      },
+      conception: {
+        problem: 'There was a need for a scalable, multi-tenant marketplace platform that could handle micro-jobs efficiently, support multiple organizations, and provide real-time search and matching capabilities while maintaining data isolation between tenants.',
+        solution: 'Developed a production-ready marketplace using Spring Boot with DDD principles, implementing event sourcing for auditability, multi-tenant architecture for isolation, and Elasticsearch for fast search capabilities.',
+        approach: 'Started with core domain modeling using DDD, then implemented hexagonal architecture for clean separation. Added event sourcing for critical business events, implemented multi-tenancy with tenant isolation, and integrated Elasticsearch for search functionality.'
+      },
+      achievements: {
+        businessValue: [
+          'Enabled multi-tenant marketplace operations',
+          'Achieved complete audit trail through event sourcing',
+          'Improved search performance with Elasticsearch',
+          'Enabled real-time job matching and notifications',
+          'Scaled to support multiple organizations'
+        ],
+        technicalAchievements: [
+          'Implemented Domain-Driven Design with bounded contexts',
+          'Built event sourcing for complete event history',
+          'Achieved multi-tenant isolation',
+          'Integrated Elasticsearch for fast search',
+          'Implemented comprehensive testing strategy'
+        ],
+        impact: 'The platform successfully provides a scalable, multi-tenant marketplace solution with complete auditability, fast search capabilities, and real-time matching, enabling efficient micro-jobs marketplace operations.'
+      }
     },
     {
       title: 'InvoicePro - Invoice & Billing Management',
@@ -416,7 +578,10 @@ const Index = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-700 opacity-0 group-hover:opacity-100"></div>
                   
                   {/* Main content */}
-                  <div className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 border border-border/40 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1 h-full flex flex-col">
+                  <div 
+                    className="relative bg-gradient-to-br from-background/90 via-background/80 to-background/90 backdrop-blur-xl rounded-3xl p-8 border border-border/40 shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1 h-full flex flex-col cursor-pointer"
+                    onClick={() => handleProjectClick(project)}
+                  >
                     {/* Header */}
                     <div className="flex items-center justify-between mb-4">
                       <span className="px-3 py-1 bg-primary/10 text-primary rounded-lg text-xs font-semibold border border-primary/20">
@@ -436,6 +601,12 @@ const Index = () => {
                     <p className="text-muted-foreground leading-relaxed text-sm mb-6 flex-grow line-clamp-3">
                       {project.description}
                     </p>
+                    
+                    {/* Click hint */}
+                    <div className="text-xs text-primary/70 mb-2 flex items-center gap-1">
+                      <span>Click to view details</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </div>
                     
                     {/* Highlights */}
                     <div className="mb-4 flex flex-wrap gap-2">
@@ -462,7 +633,7 @@ const Index = () => {
                     </div>
                     
                     {/* Action buttons */}
-                    <div className="flex gap-2 mt-auto">
+                    <div className="flex gap-2 mt-auto" onClick={(e) => e.stopPropagation()}>
                       <Button 
                         size="sm" 
                         variant="outline" 
@@ -713,6 +884,13 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      {/* Project Detail Modal */}
+      <ProjectDetailModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
