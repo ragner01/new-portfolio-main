@@ -9,7 +9,7 @@ interface UseScrollAnimationOptions {
 export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   const {
     threshold = 0.1,
-    rootMargin = '0px 0px -100px 0px',
+    rootMargin,
     triggerOnce = true
   } = options;
 
@@ -17,12 +17,29 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const fallbackTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Detect mobile and adjust rootMargin accordingly
+  const getMobileFriendlyRootMargin = useCallback(() => {
+    if (rootMargin) return rootMargin;
+    
+    // Check if mobile device
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    
+    // More lenient rootMargin for mobile devices
+    return isMobile ? '0px 0px -50px 0px' : '0px 0px -100px 0px';
+  }, [rootMargin]);
 
   const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
       setIsVisible(true);
       if (triggerOnce) {
         setHasAnimated(true);
+      }
+      // Clear fallback timer if observer triggers
+      if (fallbackTimerRef.current) {
+        clearTimeout(fallbackTimerRef.current);
+        fallbackTimerRef.current = null;
       }
     } else if (!triggerOnce) {
       setIsVisible(false);
@@ -38,9 +55,11 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
       return;
     }
 
+    const mobileFriendlyRootMargin = getMobileFriendlyRootMargin();
+
     observerRef.current = new IntersectionObserver(handleIntersection, {
       threshold,
-      rootMargin,
+      rootMargin: mobileFriendlyRootMargin,
     });
 
     const currentElement = elementRef.current;
@@ -48,14 +67,32 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
 
     if (currentElement && currentObserver) {
       currentObserver.observe(currentElement);
+      
+      // Fallback: Show content after 1 second if observer doesn't trigger
+      // This ensures content is visible on mobile even if IntersectionObserver fails
+      fallbackTimerRef.current = setTimeout(() => {
+        setIsVisible(prevVisible => {
+          if (!prevVisible && !hasAnimated) {
+            if (triggerOnce) {
+              setHasAnimated(true);
+            }
+            return true;
+          }
+          return prevVisible;
+        });
+      }, 1000);
     }
 
     return () => {
       if (currentElement && currentObserver) {
         currentObserver.unobserve(currentElement);
       }
+      if (fallbackTimerRef.current) {
+        clearTimeout(fallbackTimerRef.current);
+        fallbackTimerRef.current = null;
+      }
     };
-  }, [threshold, rootMargin, handleIntersection]);
+  }, [threshold, getMobileFriendlyRootMargin, handleIntersection, hasAnimated, triggerOnce]);
 
   return {
     elementRef,
@@ -68,12 +105,22 @@ export const useStaggeredAnimation = (itemCount: number, delay: number = 100) =>
   const [visibleItems, setVisibleItems] = useState<boolean[]>(new Array(itemCount).fill(false));
   const { elementRef, isVisible } = useScrollAnimation();
   const timersRef = useRef<NodeJS.Timeout[]>([]);
+  const fallbackTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Clear any existing timers
+    timersRef.current.forEach(timer => clearTimeout(timer));
+    timersRef.current = [];
+    
+    if (fallbackTimerRef.current) {
+      clearTimeout(fallbackTimerRef.current);
+      fallbackTimerRef.current = null;
+    }
+    
     if (isVisible) {
-      // Clear any existing timers
-      timersRef.current.forEach(timer => clearTimeout(timer));
-      timersRef.current = [];
+      // Adjust delay for mobile devices (shorter delay for better UX)
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      const adjustedDelay = isMobile ? Math.max(50, delay * 0.5) : delay;
       
       for (let i = 0; i < itemCount; i++) {
         const timer = setTimeout(() => {
@@ -82,14 +129,30 @@ export const useStaggeredAnimation = (itemCount: number, delay: number = 100) =>
             newState[i] = true;
             return newState;
           });
-        }, i * delay);
+        }, i * adjustedDelay);
         timersRef.current.push(timer);
       }
     }
+    
+    // Fallback: Show all items after 2 seconds if observer doesn't trigger or animations don't complete
+    // This ensures content is visible on mobile even if IntersectionObserver fails
+    fallbackTimerRef.current = setTimeout(() => {
+      setVisibleItems(prev => {
+        const allVisible = prev.every(item => item === true);
+        if (!allVisible) {
+          return new Array(itemCount).fill(true);
+        }
+        return prev;
+      });
+    }, 2000);
 
     return () => {
       timersRef.current.forEach(timer => clearTimeout(timer));
       timersRef.current = [];
+      if (fallbackTimerRef.current) {
+        clearTimeout(fallbackTimerRef.current);
+        fallbackTimerRef.current = null;
+      }
     };
   }, [isVisible, itemCount, delay]);
 

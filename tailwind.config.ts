@@ -134,73 +134,61 @@ export default {
 				'slide-up': {
 					'0%': { 
 						opacity: '0', 
-						transform: 'translateY(100px) scale(0.8)',
-						filter: 'blur(10px)'
+						transform: 'translateY(100px) scale(0.8)'
 					},
 					'100%': { 
 						opacity: '1', 
-						transform: 'translateY(0) scale(1)',
-						filter: 'blur(0px)'
+						transform: 'translateY(0) scale(1)'
 					}
 				},
 				'slide-down': {
 					'0%': { 
 						opacity: '0', 
-						transform: 'translateY(-100px) scale(0.8)',
-						filter: 'blur(10px)'
+						transform: 'translateY(-100px) scale(0.8)'
 					},
 					'100%': { 
 						opacity: '1', 
-						transform: 'translateY(0) scale(1)',
-						filter: 'blur(0px)'
+						transform: 'translateY(0) scale(1)'
 					}
 				},
 				'slide-left': {
 					'0%': { 
 						opacity: '0', 
-						transform: 'translateX(100px) scale(0.8)',
-						filter: 'blur(10px)'
+						transform: 'translateX(100px) scale(0.8)'
 					},
 					'100%': { 
 						opacity: '1', 
-						transform: 'translateX(0) scale(1)',
-						filter: 'blur(0px)'
+						transform: 'translateX(0) scale(1)'
 					}
 				},
 				'slide-right': {
 					'0%': { 
 						opacity: '0', 
-						transform: 'translateX(-100px) scale(0.8)',
-						filter: 'blur(10px)'
+						transform: 'translateX(-100px) scale(0.8)'
 					},
 					'100%': { 
 						opacity: '1', 
-						transform: 'translateX(0) scale(1)',
-						filter: 'blur(0px)'
+						transform: 'translateX(0) scale(1)'
 					}
 				},
 				'zoom-in': {
 					'0%': { 
 						opacity: '0', 
-						transform: 'scale(0.3) rotate(10deg)',
-						filter: 'blur(20px)'
+						transform: 'scale(0.3) rotate(10deg)'
 					},
 					'100%': { 
 						opacity: '1', 
-						transform: 'scale(1) rotate(0deg)',
-						filter: 'blur(0px)'
+						transform: 'scale(1) rotate(0deg)'
 					}
 				},
 				'flip-in': {
 					'0%': { 
 						opacity: '0', 
-						transform: 'rotateY(90deg) scale(0.8)',
-						filter: 'blur(10px)'
+						transform: 'rotateY(90deg) scale(0.8)'
 					},
 					'100%': { 
 						opacity: '1', 
-						transform: 'rotateY(0deg) scale(1)',
-						filter: 'blur(0px)'
+						transform: 'rotateY(0deg) scale(1)'
 					}
 				},
 				'parallax-float': {
