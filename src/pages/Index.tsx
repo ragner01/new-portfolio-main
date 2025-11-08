@@ -14,9 +14,12 @@ import { SEOHead } from '@/components/SEOHead';
 import { ResumeDownload } from '@/components/ResumeDownload';
 import { ProjectDetailModal, ProjectDetail } from '@/components/ProjectDetailModal';
 
+type SkillDiscipline = 'Frontend' | 'Backend' | 'Data' | 'Cloud & DevOps' | 'Tools' | 'Leadership';
+
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All');
+  const [activeSkillCategory, setActiveSkillCategory] = useState<'All' | SkillDiscipline>('All');
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
@@ -26,37 +29,39 @@ const Index = () => {
 
   const skills = [
     // Frontend Technologies
-    { name: 'React', level: 92, icon: <Code className="w-5 h-5" /> },
-    { name: 'TypeScript', level: 88, icon: <Code className="w-5 h-5" /> },
-    { name: 'JavaScript', level: 95, icon: <Code className="w-5 h-5" /> },
-    { name: 'Next.js', level: 85, icon: <Code className="w-5 h-5" /> },
+    { name: 'React', level: 92, icon: <Code className="w-5 h-5" />, category: 'Frontend' as SkillDiscipline },
+    { name: 'TypeScript', level: 88, icon: <Code className="w-5 h-5" />, category: 'Frontend' as SkillDiscipline },
+    { name: 'JavaScript', level: 95, icon: <Code className="w-5 h-5" />, category: 'Frontend' as SkillDiscipline },
+    { name: 'Next.js', level: 85, icon: <Code className="w-5 h-5" />, category: 'Frontend' as SkillDiscipline },
     
     // Backend Technologies
-    { name: 'Java', level: 85, icon: <Laptop className="w-5 h-5" /> },
-    { name: 'ASP.NET Core', level: 80, icon: <Code className="w-5 h-5" /> },
-    { name: 'Spring Boot', level: 85, icon: <Server className="w-5 h-5" /> },
+    { name: 'Java', level: 85, icon: <Laptop className="w-5 h-5" />, category: 'Backend' as SkillDiscipline },
+    { name: 'ASP.NET Core', level: 80, icon: <Code className="w-5 h-5" />, category: 'Backend' as SkillDiscipline },
+    { name: 'Spring Boot', level: 85, icon: <Server className="w-5 h-5" />, category: 'Backend' as SkillDiscipline },
     
     // Databases
-    { name: 'SQL & SQL Server', level: 90, icon: <Database className="w-5 h-5" /> },
-    { name: 'PostgreSQL', level: 85, icon: <Database className="w-5 h-5" /> },
-    { name: 'MongoDB', level: 80, icon: <Database className="w-5 h-5" /> },
-    { name: 'Redis', level: 80, icon: <Database className="w-5 h-5" /> },
+    { name: 'SQL & SQL Server', level: 90, icon: <Database className="w-5 h-5" />, category: 'Data' as SkillDiscipline },
+    { name: 'PostgreSQL', level: 85, icon: <Database className="w-5 h-5" />, category: 'Data' as SkillDiscipline },
+    { name: 'MongoDB', level: 80, icon: <Database className="w-5 h-5" />, category: 'Data' as SkillDiscipline },
+    { name: 'Redis', level: 80, icon: <Database className="w-5 h-5" />, category: 'Data' as SkillDiscipline },
     
     // Cloud & DevOps
-    { name: 'Docker', level: 85, icon: <Box className="w-5 h-5" /> },
-    { name: 'Kubernetes', level: 78, icon: <Box className="w-5 h-5" /> },
-    { name: 'AWS', level: 80, icon: <Cloud className="w-5 h-5" /> },
-    { name: 'Azure', level: 75, icon: <Cloud className="w-5 h-5" /> },
-    { name: 'Kafka', level: 82, icon: <Zap className="w-5 h-5" /> },
+    { name: 'Docker', level: 85, icon: <Box className="w-5 h-5" />, category: 'Cloud & DevOps' as SkillDiscipline },
+    { name: 'Kubernetes', level: 78, icon: <Box className="w-5 h-5" />, category: 'Cloud & DevOps' as SkillDiscipline },
+    { name: 'AWS', level: 80, icon: <Cloud className="w-5 h-5" />, category: 'Cloud & DevOps' as SkillDiscipline },
+    { name: 'Azure', level: 75, icon: <Cloud className="w-5 h-5" />, category: 'Cloud & DevOps' as SkillDiscipline },
+    { name: 'Kafka', level: 82, icon: <Zap className="w-5 h-5" />, category: 'Cloud & DevOps' as SkillDiscipline },
     
     // Tools & Others
-    { name: 'Git & GitHub', level: 92, icon: <GitBranch className="w-5 h-5" /> },
+    { name: 'Git & GitHub', level: 92, icon: <GitBranch className="w-5 h-5" />, category: 'Tools' as SkillDiscipline },
     
     // Soft Skills
-    { name: 'Project Management', level: 88, icon: <Target className="w-5 h-5" /> },
-    { name: 'Team Leadership', level: 85, icon: <Users className="w-5 h-5" /> },
-    { name: 'Communication', level: 93, icon: <MessageCircle className="w-5 h-5" /> },
+    { name: 'Project Management', level: 88, icon: <Target className="w-5 h-5" />, category: 'Leadership' as SkillDiscipline },
+    { name: 'Team Leadership', level: 85, icon: <Users className="w-5 h-5" />, category: 'Leadership' as SkillDiscipline },
+    { name: 'Communication', level: 93, icon: <MessageCircle className="w-5 h-5" />, category: 'Leadership' as SkillDiscipline },
   ];
+
+  const skillCategories: ('All' | SkillDiscipline)[] = ['All', ...Array.from(new Set(skills.map(skill => skill.category)))];
 
   const handleProjectClick = (project: ProjectDetail) => {
     setSelectedProject(project);
@@ -380,6 +385,48 @@ const Index = () => {
     }
   ];
 
+  // Hero impact stats
+  const impactStats = [
+    {
+      value: '6+',
+      label: 'Years building enterprise software',
+      detail: 'Banking · Healthcare · Public Sector'
+    },
+    {
+      value: '25+',
+      label: 'Products launched & scaled',
+      detail: 'Web · Mobile · Cloud-native'
+    },
+    {
+      value: '>$40M',
+      label: 'Business value unlocked',
+      detail: 'Process automation & new revenue'
+    }
+  ];
+
+  const careerTimeline = [
+    {
+      year: '2024',
+      role: 'Principal Full-Stack Engineer · AtlasBank',
+      impact: 'Launched PCI-DSS compliant fintech core, leading 18 engineers across web, mobile, and platform squads.'
+    },
+    {
+      year: '2022',
+      role: 'Lead Solutions Architect · OSUTH HIS',
+      impact: 'Architected multi-facility hospital platform with FHIR interoperability and NHIA/HMO automation.'
+    },
+    {
+      year: '2020',
+      role: 'Senior Software Engineer · MicroJobs Marketplace',
+      impact: 'Drove DDD + event-sourced microservices migration serving thousands of concurrent marketplace users.'
+    },
+    {
+      year: '2018',
+      role: 'Software Engineer · Early-Stage Startups',
+      impact: 'Shipped React + .NET apps for education and civic orgs, building the foundation for current leadership roles.'
+    }
+  ];
+
   // Get unique categories from projects
   const projectCategories: ProjectCategory[] = ['All', ...Array.from(new Set(projects.map(p => p.category as ProjectCategory)))];
   
@@ -392,6 +439,7 @@ const Index = () => {
     const { elementRef: aboutRef, isVisible: aboutVisible } = useScrollAnimation();
     const { elementRef: card1Ref, isVisible: card1Visible } = useScrollAnimation();
     const { elementRef: card2Ref, isVisible: card2Visible } = useScrollAnimation();
+    const { elementRef: timelineRef, isVisible: timelineVisible } = useScrollAnimation();
 
     return (
       <section className="py-20 bg-background">
@@ -473,6 +521,42 @@ const Index = () => {
               </Card>
             </div>
           </div>
+
+          <div 
+            ref={timelineRef}
+            className={`mt-12 transition-all duration-1000 ${
+              timelineVisible ? 'animate-slide-up opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Card className="bg-gradient-card backdrop-blur-sm border-glass-border shadow-card">
+              <CardContent className="p-8">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+                  <div>
+                    <p className="text-sm uppercase tracking-widest text-primary/80">Career Journey</p>
+                    <h3 className="text-2xl font-bold">Building teams & platforms with purpose</h3>
+                  </div>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/30">
+                    From early-stage to enterprise scale
+                  </Badge>
+                </div>
+                <div className="relative pl-6">
+                  <span className="absolute left-2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
+                  {careerTimeline.map((item, index) => (
+                    <div key={item.year} className="relative pb-8 last:pb-0">
+                      <span className="absolute -left-[15px] top-2 w-3 h-3 rounded-full bg-gradient-to-r from-primary to-accent shadow-glow" />
+                      <div className="flex flex-col md:flex-row md:items-baseline md:gap-4">
+                        <p className="text-sm font-semibold text-primary/80">{item.year}</p>
+                        <div>
+                          <p className="font-semibold">{item.role}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{item.impact}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
     );
@@ -480,7 +564,10 @@ const Index = () => {
 
   const SkillsSection = () => {
     const { elementRef: skillsRef, isVisible: skillsVisible } = useScrollAnimation();
-    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(skills.length, 200);
+    const filteredSkills = activeSkillCategory === 'All' 
+      ? skills 
+      : skills.filter(skill => skill.category === activeSkillCategory);
+    const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredSkills.length, 200);
 
     return (
       <section className="py-20 bg-secondary/20">
@@ -497,8 +584,27 @@ const Index = () => {
             </p>
           </div>
 
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {skillCategories.map((category) => (
+              <Button
+                key={category}
+                size="sm"
+                variant={activeSkillCategory === category ? 'default' : 'outline'}
+                onClick={() => setActiveSkillCategory(category)}
+                className={`rounded-full px-4 ${
+                  activeSkillCategory === category
+                    ? 'bg-gradient-primary text-white shadow-glow'
+                    : 'border-glass-border text-muted-foreground hover:text-foreground'
+                }`}
+                aria-pressed={activeSkillCategory === category}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+
           <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {skills.map((skill, index) => (
+            {filteredSkills.map((skill, index) => (
               <div
                 key={skill.name}
                 className={`transition-all duration-500 ${
@@ -592,6 +698,28 @@ const Index = () => {
                       </div>
                     </div>
                     
+                    {/* Media preview */}
+                    <div className="relative mb-6 h-32 rounded-2xl overflow-hidden border border-primary/20 bg-gradient-to-br from-primary/10 via-background/40 to-accent/10">
+                      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.35),_transparent_55%)] animate-pulse" />
+                      <div className="absolute inset-0 opacity-[0.12] bg-[linear-gradient(120deg,rgba(255,255,255,0.25)_1px,transparent_1px)] bg-[length:120px_120px]" />
+                      <div className="relative flex h-full flex-col justify-between p-4 text-left">
+                        <p className="text-[10px] uppercase tracking-[0.5em] text-primary/80">System Snapshot</p>
+                        <p className="text-sm font-semibold text-foreground/90 line-clamp-2">
+                          {project.architecture?.overview || project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.highlights.slice(0, 2).map((highlight) => (
+                            <span 
+                              key={highlight}
+                              className="text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-white/10 bg-background/20 text-muted-foreground"
+                            >
+                              {highlight}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
                     {/* Title */}
                     <h3 className="text-xl font-bold mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text transition-all duration-500 line-clamp-2">
                       {project.title}
@@ -633,24 +761,37 @@ const Index = () => {
                     </div>
                     
                     {/* Action buttons */}
-                    <div className="flex gap-2 mt-auto" onClick={(e) => e.stopPropagation()}>
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="flex-1"
-                        onClick={() => window.open(project.github, '_blank')}
+                    <div className="flex flex-col gap-2 mt-auto">
+                      <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="flex-1"
+                          onClick={() => window.open(project.github, '_blank')}
+                        >
+                          <Github className="w-4 h-4 mr-2" />
+                          Code
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          className="flex-1 bg-gradient-to-r from-primary to-accent"
+                          onClick={() => project.demo !== '#' ? window.open(project.demo, '_blank') : null}
+                          disabled={project.demo === '#'}
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          {project.demo !== '#' ? 'Demo' : 'Coming Soon'}
+                        </Button>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="border border-dashed border-primary/40 text-primary hover:text-primary shadow-none"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleProjectClick(project);
+                        }}
                       >
-                        <Github className="w-4 h-4 mr-2" />
-                        Code
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-gradient-to-r from-primary to-accent"
-                        onClick={() => project.demo !== '#' ? window.open(project.demo, '_blank') : null}
-                        disabled={project.demo === '#'}
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        {project.demo !== '#' ? 'Demo' : 'Coming Soon'}
+                        View case study
                       </Button>
                     </div>
                   </div>
@@ -852,6 +993,23 @@ const Index = () => {
                 <Github className="w-5 h-5 mr-2" />
                 GitHub
               </Button>
+            </div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+              {impactStats.map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className={`rounded-2xl border border-white/10 bg-white/5 dark:bg-black/20 backdrop-blur px-6 py-5 text-left shadow-card transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
+                >
+                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="text-sm font-semibold text-foreground/80">{stat.label}</p>
+                  <p className="text-xs text-muted-foreground mt-2">{stat.detail}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

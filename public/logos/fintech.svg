@@ -1,0 +1,11 @@
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fintechGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FACC15"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="8" width="132" height="24" rx="12" fill="url(#fintechGradient)" opacity="0.2"/>
+  <path d="M16 24 L26 14 L36 24" fill="none" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="44" y="25" fill="#1F2937" font-family="Arial, sans-serif" font-size="16" font-weight="600">FinTech Solutions</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="unionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="10" width="132" height="20" rx="10" fill="url(#unionGradient)" opacity="0.23"/>
+  <path d="M20 24 C24 18, 32 18, 36 24" stroke="#0EA5E9" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M20 24 C24 30, 32 30, 36 24" stroke="#0EA5E9" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <text x="44" y="26" fill="#0F172A" font-family="Arial, sans-serif" font-size="16" font-weight="600">Union Manufacturing</text>
+</svg>
