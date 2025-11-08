@@ -71,7 +71,7 @@ const Index = () => {
   const projects: ProjectDetail[] = [
     {
       title: 'AtlasBank - Enterprise Fintech Platform',
-      description: 'Production-ready fintech platform built with .NET 8 for Tier-1 Nigerian banks. Features microservices architecture, PCI DSS compliance, React Native mobile app, event-driven design with Kafka, and comprehensive observability with OpenTelemetry, Grafana, and Jaeger.',
+      description: 'Self-initiated fintech exploration built with .NET 8 to model what Tier-1 Nigerian banks would require. Features microservices architecture, PCI DSS-style controls, React Native mobile app, event-driven design with Kafka, and comprehensive observability with OpenTelemetry, Grafana, and Jaeger.',
       tech: ['.NET 8', 'React Native', 'PostgreSQL', 'Kafka', 'Kubernetes', 'Docker', 'OpenTelemetry', 'Grafana', 'Jaeger'],
       github: 'https://github.com/ragner01/Atlas-bank',
       demo: '#',
@@ -94,17 +94,17 @@ const Index = () => {
         infrastructure: ['Kubernetes for orchestration', 'Docker containers', 'PostgreSQL for data persistence', 'Redis for caching', 'Kafka for event streaming', 'OpenTelemetry for observability']
       },
       conception: {
-        problem: 'Nigerian banks needed a modern, scalable fintech platform that could handle high transaction volumes, ensure PCI DSS compliance, and provide real-time transaction processing with comprehensive monitoring and observability.',
-        solution: 'Developed a production-ready microservices platform using .NET 8 with event-driven architecture, ensuring scalability, security, and compliance. Integrated React Native for mobile banking and comprehensive observability stack for real-time monitoring.',
-        approach: 'Adopted a phased approach starting with core banking services, followed by payment integrations, mobile app development, and comprehensive observability. Used Domain-Driven Design to model complex banking domains and implemented event sourcing for critical transaction flows.'
+        problem: 'I wanted to explore what a modern Nigerian fintech core would need to stay compliant, resilient, and user-friendly.',
+        solution: 'Developed a proof-of-concept microservices platform using .NET 8 with event-driven architecture, simulating PCI DSS guardrails, real-time processing, and unified observability.',
+        approach: 'Iterated from core banking capabilities to payment integrations, mobile experience, and monitoring—leaning on Domain-Driven Design experiments and event-sourcing spikes.'
       },
       achievements: {
         businessValue: [
-          'Enabled Tier-1 banks to process millions of transactions daily',
-          'Achieved PCI DSS Level 1 compliance',
-          'Reduced transaction processing time by 60%',
-          'Improved system uptime to 99.9%',
-          'Enabled real-time fraud detection and prevention'
+          'Demonstrated how the architecture could scale to millions of simulated transactions',
+          'Modelled controls that align with PCI DSS Level 1 expectations',
+          'Showed projected 60% faster processing via async workflows',
+          'Designed for 99.9% uptime using redundancy patterns',
+          'Outlined real-time fraud detection hooks with Kafka streams'
         ],
         technicalAchievements: [
           'Implemented event-driven architecture with Kafka for high throughput',
@@ -113,12 +113,12 @@ const Index = () => {
           'Developed React Native mobile app with offline capabilities',
           'Implemented distributed tracing for end-to-end visibility'
         ],
-        impact: 'The platform successfully handles millions of transactions daily for Tier-1 Nigerian banks, providing a secure, scalable, and compliant fintech solution that meets international banking standards while addressing local market needs.'
+        impact: 'Serves as a reference implementation highlighting my ability to think through regulated fintech systems even without production data.'
       }
     },
     {
       title: 'OSUTH - Hospital Information System',
-      description: 'Production-ready hospital information system for Nigeria featuring multi-facility support, FHIR interoperability, enterprise-grade security. Comprehensive EMR with patient management, appointments, lab/radiology orders, billing, pharmacy, and operational analytics.',
+      description: 'Self-initiated hospital information system concept for Nigeria featuring multi-facility support, FHIR interoperability, enterprise-grade security, and complete EMR workflows.',
       tech: ['Spring Boot', 'React', 'PostgreSQL', 'Docker', 'Kubernetes', 'FHIR R4', 'Keycloak', 'AWS', 'Terraform'],
       github: 'https://github.com/ragner01/OSUTH',
       demo: '#',
@@ -142,17 +142,17 @@ const Index = () => {
         infrastructure: ['Kubernetes for container orchestration', 'AWS EKS for managed Kubernetes', 'PostgreSQL for primary data store', 'Redis for session management', 'Keycloak for identity management', 'Terraform for infrastructure as code']
       },
       conception: {
-        problem: 'Nigerian hospitals needed a comprehensive, interoperable hospital information system that could support multiple facilities, integrate with NHIA/HMO systems, and comply with healthcare data standards while providing modern clinical workflows.',
-        solution: 'Developed a production-ready HIS using Spring Boot and React, implementing FHIR R4 standards for interoperability, multi-tenant architecture for multi-facility support, and comprehensive clinical workflows including EMR, lab, radiology, pharmacy, and billing modules.',
-        approach: 'Started with core patient management and clinical documentation, then expanded to include lab/radiology, pharmacy, and billing. Implemented FHIR R4 early to ensure interoperability. Used Keycloak for enterprise-grade authentication and authorization, and Terraform for infrastructure automation.'
+        problem: 'Wanted to map out what Nigerian hospitals would need from a comprehensive, interoperable HIS covering NHIA/HMO needs and modern clinical workflows.',
+        solution: 'Developed a reference HIS using Spring Boot and React, implementing FHIR R4 standards, multi-tenant architecture, and full EMR, lab, radiology, pharmacy, and billing modules.',
+        approach: 'Started with patient management and documentation, then layered lab/radiology, pharmacy, and billing. Implemented FHIR R4 early for interoperability, Keycloak for IAM, and Terraform for repeatable infra.'
       },
       achievements: {
         businessValue: [
-          'Enabled multi-facility hospital operations',
-          'Streamlined clinical workflows reducing documentation time by 40%',
-          'Automated NHIA/HMO claims processing',
-          'Improved patient data accessibility across facilities',
-          'Enhanced compliance with healthcare data standards'
+          'Demonstrated multi-facility operations with data isolation',
+          'Outlined workflow improvements targeting 40% faster documentation',
+          'Showed how NHIA/HMO claims could be automated',
+          'Improved cross-facility data visibility in simulations',
+          'Kept designs aligned with healthcare data standards'
         ],
         technicalAchievements: [
           'Implemented FHIR R4 for healthcare interoperability',
@@ -161,12 +161,12 @@ const Index = () => {
           'Developed comprehensive EMR with clinical workflows',
           'Automated infrastructure deployment with Terraform'
         ],
-        impact: 'The system successfully supports multiple hospital facilities in Nigeria, providing seamless patient care coordination, automated claims processing, and FHIR-compliant data exchange, significantly improving healthcare delivery efficiency.'
+        impact: 'Acts as a blueprint demonstrating how I would approach Nigerian healthcare digitization—no production hospitals are using it yet.'
       }
     },
     {
       title: 'DeltaGrid - Oil & Gas Operations Platform',
-      description: 'Enterprise Nigerian upstream O&G operations platform featuring ingestion, allocation, integrity management, PTW, events, optimization, custody transfer, lab management, digital twin, leak detection. Includes Blazor Ops Console, MAUI Field App, API Gateway, observability, data lakehouse, and MLOps capabilities.',
+      description: 'Conceptual Nigerian upstream O&G operations platform featuring ingestion, allocation, integrity management, PTW, events, optimization, custody transfer, lab management, digital twin, leak detection. Includes Blazor Ops Console, MAUI Field App, API Gateway, observability, data lakehouse, and MLOps capabilities.',
       tech: ['.NET', 'Blazor Server', '.NET MAUI', 'Azure', 'PostgreSQL', 'Azure Data Lake', 'Delta Lake', 'OpenTelemetry', 'YARP', 'MLOps'],
       github: 'https://github.com/ragner01/DeltaGrid',
       demo: '#',
@@ -193,17 +193,17 @@ const Index = () => {
         infrastructure: ['Azure Kubernetes Service (AKS)', 'Azure Data Lake Storage Gen2', 'Delta Lake for data versioning', 'PostgreSQL for transactional data', 'Azure Cognitive Search', 'OpenTelemetry for observability', 'MLOps with ONNX models']
       },
       conception: {
-        problem: 'Nigerian upstream operators needed a unified platform to manage complex O&G operations including allocation, integrity management, custody transfer, and field operations. The system needed to work offline in remote locations and provide real-time insights through digital twin technology.',
-        solution: 'Developed a comprehensive operations platform with Blazor Server for centralized operations, .NET MAUI for offline field operations, and a data lakehouse architecture for analytics. Implemented MLOps for predictive maintenance and digital twin for asset visualization.',
-        approach: 'Adopted a phased approach starting with core operations (allocation, integrity), then expanding to field operations (PTW, lab management), followed by advanced capabilities (digital twin, MLOps). Used medallion architecture for data processing and Delta Lake for versioning. Implemented offline-first MAUI app with vector clocks for conflict resolution.'
+        problem: 'Explored how Nigerian upstream operators could unify allocation, integrity management, custody transfer, and field ops in one resilient platform that also works offline.',
+        solution: 'Designed a comprehensive operations platform with Blazor Server for centralized ops, .NET MAUI for offline field teams, and a data lakehouse architecture for analytics. Added MLOps hooks for predictive maintenance and digital twin visualizations.',
+        approach: 'Prototyped core operations first, then layered PTW, lab, digital twin, and leak detection. Used medallion architecture for data processing, Delta Lake for versioning, and vector-clock conflict resolution in the MAUI app.'
       },
       achievements: {
         businessValue: [
-          'Streamlined O&G operations across multiple facilities',
-          'Improved allocation accuracy by 95%',
-          'Reduced downtime through predictive maintenance',
-          'Enabled offline field operations in remote locations',
-          'Enhanced decision-making with digital twin visualization'
+          'Modelled streamlined operations across multiple facilities',
+          'Showed how allocation accuracy could approach 95% through reconciliation logic',
+          'Outlined predictive maintenance workflows to reduce downtime',
+          'Proved offline field operations concept for remote locations',
+          'Enhanced decision-making with digital twin visualization prototypes'
         ],
         technicalAchievements: [
           'Built offline-first MAUI app with conflict resolution',
@@ -213,7 +213,7 @@ const Index = () => {
           'Achieved real-time leak detection using statistical methods',
           'Built comprehensive observability with OpenTelemetry'
         ],
-        impact: 'The platform successfully manages complex upstream O&G operations in Nigeria, providing real-time insights, offline field capabilities, and predictive maintenance, significantly improving operational efficiency and safety.'
+        impact: 'A deep-dive case study demonstrating how I would handle complex upstream O&G needs—no live production operators are onboarded.'
       }
     },
     {
@@ -385,7 +385,6 @@ const Index = () => {
     }
   ];
 
-  // Hero impact stats
   const impactStats = [
     {
       value: '6+',
@@ -407,23 +406,23 @@ const Index = () => {
   const careerTimeline = [
     {
       year: '2024',
-      role: 'Principal Full-Stack Engineer · AtlasBank',
-      impact: 'Launched PCI-DSS compliant fintech core, leading 18 engineers across web, mobile, and platform squads.'
+      role: 'AtlasBank Enterprise Fintech · Personal Build',
+      impact: 'Prototyped a PCI-DSS style core banking platform end-to-end, exploring microservices, Kafka, and mobile experiences without any client affiliation.'
     },
     {
       year: '2022',
-      role: 'Lead Solutions Architect · OSUTH HIS',
-      impact: 'Architected multi-facility hospital platform with FHIR interoperability and NHIA/HMO automation.'
+      role: 'OSUTH Hospital System · Self-Initiated Case Study',
+      impact: 'Documented and engineered a FHIR-ready multi-facility HIS concept to deepen healthcare domain knowledge for future client engagements.'
     },
     {
       year: '2020',
-      role: 'Senior Software Engineer · MicroJobs Marketplace',
-      impact: 'Drove DDD + event-sourced microservices migration serving thousands of concurrent marketplace users.'
+      role: 'MicroJobs Marketplace · Open Source Initiative',
+      impact: 'Applied DDD + event sourcing patterns to a community marketplace project, focusing on multi-tenant isolation and auditability.'
     },
     {
       year: '2018',
-      role: 'Software Engineer · Early-Stage Startups',
-      impact: 'Shipped React + .NET apps for education and civic orgs, building the foundation for current leadership roles.'
+      role: 'Early Full-Stack Explorations',
+      impact: 'Built React and .NET side projects for education/civic ideas, building the foundation for today’s architecture-heavy experiments.'
     }
   ];
 
@@ -658,6 +657,9 @@ const Index = () => {
             </h2>
             <p className="text-xl text-muted-foreground">
               Some of my recent work and personal projects
+            </p>
+            <p className="text-sm text-muted-foreground/80 max-w-2xl mx-auto mt-2">
+              Note: These enterprise builds are self-directed case studies I engineered to sharpen domain expertise—they are not client employment claims.
             </p>
           </div>
 
