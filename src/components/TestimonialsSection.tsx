@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { Button } from '@/components/ui/button';
+import { SectionBackdrop } from '@/components/SectionBackdrop';
 
 interface Testimonial {
   id: string;
@@ -98,7 +99,8 @@ export const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-secondary/20" id="testimonials">
+    <section className="py-20 bg-secondary/20 relative overflow-hidden" id="testimonials">
+      <SectionBackdrop variant="right" intensity="soft" />
       <div className="container mx-auto px-4">
         <div 
           ref={elementRef}

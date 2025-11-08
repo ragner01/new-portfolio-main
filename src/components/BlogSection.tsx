@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, ArrowRight, BookOpen, ExternalLink, Github } from 'lucide-react';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/use-scroll-animation';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { SectionBackdrop } from '@/components/SectionBackdrop';
 
 interface BlogPost {
   id: string;
@@ -516,6 +517,7 @@ export const BlogSection = () => {
   return (
     <>
       <section id="blog" className="py-20 bg-background relative overflow-hidden">
+        <SectionBackdrop variant="right" intensity="soft" />
         {/* Background decorative elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>

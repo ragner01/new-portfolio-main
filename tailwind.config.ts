@@ -214,7 +214,8 @@ export default {
 				'slide-right': 'slide-right 1.2s ease-out forwards',
 				'zoom-in': 'zoom-in 1.5s ease-out forwards',
 				'flip-in': 'flip-in 1.3s ease-out forwards',
-				'parallax-float': 'parallax-float 8s ease-in-out infinite'
+				'parallax-float': 'parallax-float 8s ease-in-out infinite',
+				'marquee': 'marquee 25s linear infinite'
 			},
 			transitionProperty: {
 				'smooth': 'var(--transition-smooth)',

@@ -13,6 +13,7 @@ import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { SEOHead } from '@/components/SEOHead';
 import { ResumeDownload } from '@/components/ResumeDownload';
 import { ProjectDetailModal, ProjectDetail } from '@/components/ProjectDetailModal';
+import { SectionBackdrop } from '@/components/SectionBackdrop';
 
 type SkillDiscipline = 'Frontend' | 'Backend' | 'Data' | 'Cloud & DevOps' | 'Tools' | 'Leadership';
 
@@ -26,6 +27,8 @@ const Index = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const [statsActive, setStatsActive] = useState(false);
 
   const skills = [
     // Frontend Technologies
@@ -387,18 +390,22 @@ const Index = () => {
 
   const impactStats = [
     {
-      value: '6+',
+      endValue: 6,
+      suffix: '+',
       label: 'Years building enterprise software',
       detail: 'Banking · Healthcare · Public Sector'
     },
     {
-      value: '25+',
+      endValue: 25,
+      suffix: '+',
       label: 'Products launched & scaled',
       detail: 'Web · Mobile · Cloud-native'
     },
     {
-      value: '>$40M',
-      label: 'Business value unlocked',
+      endValue: 40,
+      prefix: '>$',
+      suffix: 'M',
+      label: 'Business value modelled',
       detail: 'Process automation & new revenue'
     }
   ];
@@ -441,7 +448,8 @@ const Index = () => {
     const { elementRef: timelineRef, isVisible: timelineVisible } = useScrollAnimation();
 
     return (
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-background relative overflow-hidden">
+        <SectionBackdrop variant="left" />
         <div className="container mx-auto px-4">
           <div 
             ref={aboutRef}
@@ -569,7 +577,8 @@ const Index = () => {
     const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(filteredSkills.length, 200);
 
     return (
-      <section className="py-20 bg-secondary/20">
+      <section className="py-20 bg-secondary/20 relative overflow-hidden">
+        <SectionBackdrop variant="center" intensity="soft" />
         <div className="container mx-auto px-4">
           <div 
             ref={skillsRef}
@@ -639,6 +648,7 @@ const Index = () => {
 
     return (
       <section id="projects" className="py-20 bg-background relative overflow-hidden">
+        <SectionBackdrop variant="center" />
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
@@ -662,6 +672,8 @@ const Index = () => {
               Note: These enterprise builds are self-directed case studies I engineered to sharpen domain expertise—they are not client employment claims.
             </p>
           </div>
+
+          <ProjectCinematicStrip items={projects} />
 
           <ProjectFilter
             categories={projectCategories}
@@ -808,9 +820,18 @@ const Index = () => {
 
   const ContactSection = () => {
     const { elementRef: contactRef, isVisible: contactVisible } = useScrollAnimation();
+    const { elementRef: statsRef, isVisible: statsVisible } = useScrollAnimation();
+    
+    // Trigger stats animation when stats section is visible
+    useEffect(() => {
+      if (statsVisible) {
+        setStatsActive(true);
+      }
+    }, [statsVisible]);
 
     return (
-      <section id="contact" className="py-20 bg-secondary/20">
+      <section id="contact" className="py-20 bg-secondary/20 relative overflow-hidden">
+        <SectionBackdrop variant="right" intensity="soft" />
         <div className="container mx-auto px-4">
           <div 
             ref={contactRef}
@@ -882,6 +903,20 @@ const Index = () => {
               </div>
               
               <ContactForm />
+            </div>
+          </div>
+          
+          {/* Stats Section */}
+          <div 
+            ref={statsRef}
+            className={`mt-10 transition-all duration-1000 ${
+              statsVisible ? 'animate-slide-up opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+              {impactStatConfig.map((stat, index) => (
+                <ImpactStatCard key={stat.label} stat={stat} index={index} isActive={statsActive} />
+              ))}
             </div>
           </div>
         </div>
@@ -996,23 +1031,6 @@ const Index = () => {
                 GitHub
               </Button>
             </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-              {impactStats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className={`rounded-2xl border border-white/10 bg-white/5 dark:bg-black/20 backdrop-blur px-6 py-5 text-left shadow-card transition-all duration-700 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
-                >
-                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
-                    {stat.value}
-                  </p>
-                  <p className="text-sm font-semibold text-foreground/80">{stat.label}</p>
-                  <p className="text-xs text-muted-foreground mt-2">{stat.detail}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -1056,3 +1074,106 @@ const Index = () => {
 };
 
 export default Index;
+const useCountUp = (endValue: number, isActive: boolean, duration = 1200) => {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!isActive) return;
+
+    let animationFrame: number;
+    let startTimestamp: number | null = null;
+
+    const step = (timestamp: number) => {
+      if (startTimestamp === null) {
+        startTimestamp = timestamp;
+      }
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const nextValue = Math.round(progress * endValue);
+      setValue(nextValue);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(step);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [endValue, isActive, duration]);
+
+  return value;
+};
+
+type ImpactStatConfig = {
+  endValue: number;
+  label: string;
+  detail: string;
+  prefix?: string;
+  suffix?: string;
+};
+
+const impactStatConfig: ImpactStatConfig[] = [
+  {
+    endValue: 6,
+    suffix: '+',
+    label: 'Years building enterprise software',
+    detail: 'Banking · Healthcare · Public Sector'
+  },
+  {
+    endValue: 25,
+    suffix: '+',
+    label: 'Products launched & scaled',
+    detail: 'Web · Mobile · Cloud-native'
+  },
+  {
+    endValue: 40,
+    prefix: '>$',
+    suffix: 'M',
+    label: 'Business value modelled',
+    detail: 'Process automation & new revenue'
+  }
+];
+
+const ImpactStatCard = ({ stat, index, isActive }: { stat: ImpactStatConfig; index: number; isActive: boolean }) => {
+  const animatedValue = useCountUp(stat.endValue, isActive, 1200 + index * 120);
+  const displayValue = `${stat.prefix ?? ''}${animatedValue.toLocaleString()}${stat.suffix ?? ''}`;
+
+  return (
+    <div
+      className={`rounded-2xl border border-white/10 bg-white/5 dark:bg-black/20 backdrop-blur px-6 py-5 text-left shadow-card transition-all duration-700 ${
+        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+        {displayValue}
+      </p>
+      <p className="text-sm font-semibold text-foreground/80">{stat.label}</p>
+      <p className="text-xs text-muted-foreground mt-2">{stat.detail}</p>
+    </div>
+  );
+};
+
+const ProjectCinematicStrip = ({ items }: { items: ProjectDetail[] }) => {
+  const marqueeItems = [...items.slice(0, 6), ...items.slice(0, 6)];
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-background/80 via-background/50 to-background/80 mb-12">
+      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.25),_transparent_60%)]" />
+      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,_rgba(255,255,255,0.15)_1px,_transparent_1px)] bg-[length:160px_160px]" />
+      <div className="flex items-center gap-8 whitespace-nowrap animate-marquee py-6">
+        {marqueeItems.map((project, index) => (
+          <div
+            key={`${project.title}-${index}`}
+            className="flex items-center gap-3 px-6 text-sm text-muted-foreground/80"
+          >
+            <span className="w-2 h-2 rounded-full bg-primary/70 shadow-glow" />
+            <p className="font-semibold text-foreground/90">{project.title}</p>
+            <span className="text-xs uppercase tracking-wide text-primary/70">{project.category}</span>
+          </div>
+        ))}
+      </div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
+    </div>
+  );
+};
